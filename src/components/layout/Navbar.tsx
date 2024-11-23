@@ -4,6 +4,7 @@ import { useNavigation } from '@/contexts/navigation-context'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { cn } from '@/lib/utils'
 import { LogoWithEyeIteration } from "@/components/Logo/Logo"
+import { useTranslation } from "react-i18next"
 import { 
   Search, 
   LogIn, 
@@ -27,6 +28,7 @@ import {
 
 const UserDropdownContent = () => {
   const { user, logout } = useAuth()
+  const { t } = useTranslation()
   
   return (
     <DropdownMenuContent align="end" className="w-56">
@@ -44,34 +46,31 @@ const UserDropdownContent = () => {
       <DropdownMenuItem asChild>
         <Link to="/profile" className="flex w-full items-center">
           <User className="mr-2 h-4 w-4" />
-          Profile
+          {t('nav.profile')}
         </Link>
       </DropdownMenuItem>
       <DropdownMenuItem asChild>
         <Link to="/settings" className="flex w-full items-center">
           <Settings className="mr-2 h-4 w-4" />
-          Settings
+          {t('nav.settings')}
         </Link>
       </DropdownMenuItem>
       <DropdownMenuItem asChild>
         <Link to="/projects" className="flex w-full items-center">
           <Briefcase className="mr-2 h-4 w-4" />
-          My Projects
+          {t('nav.projects')}
         </Link>
       </DropdownMenuItem>
       <DropdownMenuItem asChild>
         <Link to="/messages" className="flex w-full items-center">
           <Mail className="mr-2 h-4 w-4" />
-          Messages
+          {t('nav.messages')}
         </Link>
       </DropdownMenuItem>
       <DropdownMenuSeparator />
-      <DropdownMenuItem 
-        onClick={logout}
-        className="flex w-full items-center text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950"
-      >
+      <DropdownMenuItem className="text-red-600 focus:text-red-600" onClick={logout}>
         <LogOut className="mr-2 h-4 w-4" />
-        Log out
+        {t('nav.signOut')}
       </DropdownMenuItem>
     </DropdownMenuContent>
   )
@@ -80,6 +79,7 @@ const UserDropdownContent = () => {
 const Navbar = () => {
   const { isMobileMenuOpen } = useNavigation()
   const { isAuthenticated, user, login } = useAuth()
+  const { t } = useTranslation()
 
   return (
     <header className={cn(
@@ -88,9 +88,7 @@ const Navbar = () => {
     )}>
       <div className="container flex h-14 items-center justify-between">
         {/* Logo - Visible on all screens */}
-        <Link to="/" className="mr-4">
-          <LogoWithEyeIteration />
-        </Link>
+        <LogoWithEyeIteration />
 
         {/* Mobile Actions */}
         <div className="flex items-center gap-2 md:hidden">
@@ -143,10 +141,10 @@ const Navbar = () => {
         {/* Navigation Links - Hidden on mobile */}
         <nav className="hidden md:flex items-center space-x-6 flex-1">
           <Link to="/services" className="text-sm font-medium transition-colors hover:text-primary">
-            Services
+            {t('nav.services')}
           </Link>
           <Link to="/freelancers" className="text-sm font-medium transition-colors hover:text-primary">
-            Freelancers
+            {t('nav.freelancers')}
           </Link>
         </nav>
 
@@ -173,11 +171,11 @@ const Navbar = () => {
             </DropdownMenu>
           ) : (
             <>
-              <Button variant="outline" className="hidden md:inline-flex">
-                Sign In
+              <Button variant="outline" className="hidden md:inline-flex" onClick={login}>
+                {t('nav.signIn')}
               </Button>
-              <Button className="hidden md:inline-flex">
-                Get Started
+              <Button className="hidden md:inline-flex" asChild>
+                <Link to="/signup">{t('nav.getStarted')}</Link>
               </Button>
             </>
           )}

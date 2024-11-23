@@ -1,0 +1,75 @@
+{
+  "menu": {
+    "title": "القائمة",
+    "navigation": {
+      "home": "الرئيسية",
+      "services": "الخدمات",
+      "messages": "الرسائل",
+      "notifications": "الإشعارات",
+      "menu": "القائمة"
+    },
+    "sections": {
+      "profile": {
+        "title": "الملف الشخصي",
+        "yourProfile": "ملفك الشخصي",
+        "settings": "الإعدادات",
+        "viewProfile": "عرض وتعديل ملفك الشخصي",
+        "manageAccount": "إدارة حسابك"
+      },
+      "findWork": {
+        "title": "ابحث عن عمل",
+        "browseServices": "تصفح الخدمات",
+        "findFreelancers": "ابحث عن المستقلين",
+        "exploreServices": "استكشف الخدمات المتاحة",
+        "connectProfessionals": "تواصل مع المحترفين"
+      },
+      "support": {
+        "title": "الدعم",
+        "helpCenter": "مركز المساعدة",
+        "getHelp": "احصل على المساعدة والدعم"
+      },
+      "account": {
+        "title": "الحساب",
+        "signOut": "تسجيل الخروج",
+        "signOutDesc": "تسجيل الخروج من حسابك",
+        "signIn": "تسجيل الدخول",
+        "signInDesc": "الوصول إلى حسابك",
+        "createAccount": "إنشاء حساب",
+        "createAccountDesc": "انضم إلى مجتمعنا"
+      }
+    },
+    "theme": {
+      "title": "المظهر",
+      "light": "فاتح",
+      "dark": "داكن",
+      "system": "النظام"
+    },
+    "welcome": {
+      "authenticated": {
+        "title": "{{name}}"
+      },
+      "guest": {
+        "title": "مرحباً بك في Visible",
+        "subtitle": "سجل دخولك للوصول إلى جميع الميزات"
+      }
+    }
+  },
+  "brand": {
+    "name": "فيزيبل",
+    "slogan": {
+      "illuminate": "إضاءة المواهب",
+      "emerge": "التألق والتميز"
+    }
+  },
+  "nav": {
+    "services": "الخدمات",
+    "freelancers": "المستقلون",
+    "profile": "الملف الشخصي",
+    "settings": "الإعدادات",
+    "projects": "مشاريعي",
+    "messages": "الرسائل",
+    "signIn": "تسجيل الدخول",
+    "signOut": "تسجيل الخروج",
+    "getStarted": "ابدأ الآن"
+  }
+}

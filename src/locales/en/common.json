@@ -1,0 +1,75 @@
+{
+  "menu": {
+    "title": "Menu",
+    "navigation": {
+      "home": "Home",
+      "services": "Services",
+      "messages": "Messages",
+      "notifications": "Notifications",
+      "menu": "Menu"
+    },
+    "sections": {
+      "profile": {
+        "title": "Profile",
+        "yourProfile": "Your Profile",
+        "settings": "Settings",
+        "viewProfile": "View and edit your profile",
+        "manageAccount": "Manage your account"
+      },
+      "findWork": {
+        "title": "Find Work",
+        "browseServices": "Browse Services",
+        "findFreelancers": "Find Freelancers",
+        "exploreServices": "Explore available services",
+        "connectProfessionals": "Connect with talented professionals"
+      },
+      "support": {
+        "title": "Support",
+        "helpCenter": "Help Center",
+        "getHelp": "Get help and support"
+      },
+      "account": {
+        "title": "Account",
+        "signOut": "Sign Out",
+        "signOutDesc": "Sign out of your account",
+        "signIn": "Sign In",
+        "signInDesc": "Access your account",
+        "createAccount": "Create Account",
+        "createAccountDesc": "Join our community"
+      }
+    },
+    "theme": {
+      "title": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "welcome": {
+      "authenticated": {
+        "title": "{{name}}"
+      },
+      "guest": {
+        "title": "Welcome to Visible",
+        "subtitle": "Sign in to access all features"
+      }
+    }
+  },
+  "brand": {
+    "name": "Visible",
+    "slogan": {
+      "illuminate": "Illuminate Talent",
+      "emerge": "Emerge & Excel"
+    }
+  },
+  "nav": {
+    "services": "Services",
+    "freelancers": "Freelancers",
+    "profile": "Profile",
+    "settings": "Settings",
+    "projects": "My Projects",
+    "messages": "Messages",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "getStarted": "Get Started"
+  }
+}

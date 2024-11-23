@@ -1,0 +1,75 @@
+{
+  "menu": {
+    "title": "Menu",
+    "navigation": {
+      "home": "Accueil",
+      "services": "Services",
+      "messages": "Messages",
+      "notifications": "Notifications",
+      "menu": "Menu"
+    },
+    "sections": {
+      "profile": {
+        "title": "Profil",
+        "yourProfile": "Votre Profil",
+        "settings": "Paramètres",
+        "viewProfile": "Voir et modifier votre profil",
+        "manageAccount": "Gérer votre compte"
+      },
+      "findWork": {
+        "title": "Trouver du travail",
+        "browseServices": "Parcourir les services",
+        "findFreelancers": "Trouver des freelances",
+        "exploreServices": "Explorer les services disponibles",
+        "connectProfessionals": "Connectez-vous avec des professionnels"
+      },
+      "support": {
+        "title": "Support",
+        "helpCenter": "Centre d'aide",
+        "getHelp": "Obtenir de l'aide et du support"
+      },
+      "account": {
+        "title": "Compte",
+        "signOut": "Déconnexion",
+        "signOutDesc": "Se déconnecter de votre compte",
+        "signIn": "Connexion",
+        "signInDesc": "Accéder à votre compte",
+        "createAccount": "Créer un compte",
+        "createAccountDesc": "Rejoignez notre communauté"
+      }
+    },
+    "theme": {
+      "title": "Thème",
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
+    },
+    "welcome": {
+      "authenticated": {
+        "title": "{{name}}"
+      },
+      "guest": {
+        "title": "Bienvenue sur Visible",
+        "subtitle": "Connectez-vous pour accéder à toutes les fonctionnalités"
+      }
+    }
+  },
+  "brand": {
+    "name": "Visible",
+    "slogan": {
+      "illuminate": "Illuminer le Talent",
+      "emerge": "Émerger & Exceller"
+    }
+  },
+  "nav": {
+    "services": "Services",
+    "freelancers": "Freelances",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "projects": "Mes Projets",
+    "messages": "Messages",
+    "signIn": "Se Connecter",
+    "signOut": "Se Déconnecter",
+    "getStarted": "Commencer"
+  }
+}
