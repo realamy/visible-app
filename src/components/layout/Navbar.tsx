@@ -4,10 +4,82 @@ import { useNavigation } from '@/contexts/navigation-context'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { cn } from '@/lib/utils'
 import { LogoWithEyeIteration } from "@/components/Logo/Logo"
-import { Search } from 'lucide-react'
+import { 
+  Search, 
+  LogIn, 
+  UserPlus, 
+  User, 
+  Settings, 
+  Briefcase, 
+  LogOut,
+  Mail
+} from 'lucide-react'
+import { useAuth } from "@/contexts/auth-context"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+const UserDropdownContent = () => {
+  const { user, logout } = useAuth()
+  
+  return (
+    <DropdownMenuContent align="end" className="w-56">
+      <div className="flex items-center justify-start gap-2 p-2">
+        <Avatar className="h-8 w-8">
+          <AvatarImage src={user?.avatar} alt={user?.name} />
+          <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+        </Avatar>
+        <div className="flex flex-col space-y-1">
+          <p className="text-sm font-medium leading-none">{user?.name}</p>
+          <p className="text-xs leading-none text-muted-foreground">{user?.email}</p>
+        </div>
+      </div>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem asChild>
+        <Link to="/profile" className="flex w-full items-center">
+          <User className="mr-2 h-4 w-4" />
+          Profile
+        </Link>
+      </DropdownMenuItem>
+      <DropdownMenuItem asChild>
+        <Link to="/settings" className="flex w-full items-center">
+          <Settings className="mr-2 h-4 w-4" />
+          Settings
+        </Link>
+      </DropdownMenuItem>
+      <DropdownMenuItem asChild>
+        <Link to="/projects" className="flex w-full items-center">
+          <Briefcase className="mr-2 h-4 w-4" />
+          My Projects
+        </Link>
+      </DropdownMenuItem>
+      <DropdownMenuItem asChild>
+        <Link to="/messages" className="flex w-full items-center">
+          <Mail className="mr-2 h-4 w-4" />
+          Messages
+        </Link>
+      </DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem 
+        onClick={logout}
+        className="flex w-full items-center text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950"
+      >
+        <LogOut className="mr-2 h-4 w-4" />
+        Log out
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  )
+}
 
 const Navbar = () => {
   const { isMobileMenuOpen } = useNavigation()
+  const { isAuthenticated, user, login } = useAuth()
 
   return (
     <header className={cn(
@@ -20,15 +92,53 @@ const Navbar = () => {
           <LogoWithEyeIteration />
         </Link>
 
-        {/* Search Button - Mobile */}
-        <Button 
-          variant="ghost" 
-          size="icon"
-          className="md:hidden"
-          onClick={() => {/* Add search functionality */}}
-        >
-          <Search className="h-5 w-5" />
-        </Button>
+        {/* Mobile Actions */}
+        <div className="flex items-center gap-2 md:hidden">
+          <Button 
+            variant="ghost" 
+            size="icon"
+            onClick={() => {/* Add search functionality */}}
+          >
+            <Search className="h-5 w-5" />
+          </Button>
+
+          {isAuthenticated ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="h-8 w-8 rounded-full"
+                >
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src={user?.avatar} alt={user?.name} />
+                    <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <UserDropdownContent />
+            </DropdownMenu>
+          ) : (
+            <>
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={login}
+              >
+                <LogIn className="h-5 w-5" />
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="icon"
+                asChild
+              >
+                <Link to="/signup">
+                  <UserPlus className="h-5 w-5" />
+                </Link>
+              </Button>
+            </>
+          )}
+        </div>
 
         {/* Navigation Links - Hidden on mobile */}
         <nav className="hidden md:flex items-center space-x-6 flex-1">
@@ -45,12 +155,32 @@ const Navbar = () => {
           <div className="hidden md:block">
             <ThemeToggle size="sm" />
           </div>
-          <Button variant="outline" className="hidden md:inline-flex">
-            Sign In
-          </Button>
-          <Button className="hidden md:inline-flex">
-            Get Started
-          </Button>
+          {isAuthenticated ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="relative h-8 w-8 rounded-full"
+                >
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src={user?.avatar} alt={user?.name} />
+                    <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <UserDropdownContent />
+            </DropdownMenu>
+          ) : (
+            <>
+              <Button variant="outline" className="hidden md:inline-flex">
+                Sign In
+              </Button>
+              <Button className="hidden md:inline-flex">
+                Get Started
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </header>
