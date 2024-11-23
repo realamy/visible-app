@@ -71,7 +71,7 @@ const Footer = () => {
         <div className="flex flex-col items-center justify-between gap-4 pt-8 mt-8 border-t md:flex-row">
           <div className="flex items-center order-2 space-x-6 md:order-1">
             <span className="text-sm text-muted-foreground">
-              {currentYear} KhedmaTech. All rights reserved.
+              {currentYear} Visible. All rights reserved.
             </span>
           </div>
 

@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button"
 import { useNavigation } from '@/contexts/navigation-context'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { cn } from '@/lib/utils'
-import { LogoWithEyeIteration } from "@/components/Logo/Logo";
+import { LogoWithEyeIteration } from "@/components/Logo/Logo"
+import { Search } from 'lucide-react'
 
 const Navbar = () => {
   const { isMobileMenuOpen } = useNavigation()
@@ -13,10 +14,22 @@ const Navbar = () => {
       "sticky top-0 z-50 w-full border-b bg-background",
       isMobileMenuOpen ? "hidden md:block" : "block"
     )}>
-      <div className="container flex h-14 items-center">
-      <Link to="/">
-        <LogoWithEyeIteration />
-      </Link>
+      <div className="container flex h-14 items-center justify-between">
+        {/* Logo - Visible on all screens */}
+        <Link to="/" className="mr-4">
+          <LogoWithEyeIteration />
+        </Link>
+
+        {/* Search Button - Mobile */}
+        <Button 
+          variant="ghost" 
+          size="icon"
+          className="md:hidden"
+          onClick={() => {/* Add search functionality */}}
+        >
+          <Search className="h-5 w-5" />
+        </Button>
+
         {/* Navigation Links - Hidden on mobile */}
         <nav className="hidden md:flex items-center space-x-6 flex-1">
           <Link to="/services" className="text-sm font-medium transition-colors hover:text-primary">
@@ -27,8 +40,8 @@ const Navbar = () => {
           </Link>
         </nav>
 
-        {/* Right Section - Theme & Auth */}
-        <div className="flex items-center space-x-4">
+        {/* Right Section - Theme & Auth (Hidden on mobile) */}
+        <div className="hidden md:flex items-center space-x-4">
           <div className="hidden md:block">
             <ThemeToggle size="sm" />
           </div>

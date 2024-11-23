@@ -353,6 +353,186 @@ function Home() {
         </div>
       </section>
 
+      {/* How It Works Section */}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-4">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">How Visible Works</h2>
+            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+              Whether you're looking to hire or ready to work, Visible makes it simple. Choose your path:
+            </p>
+            
+            <div className="flex items-center justify-center gap-4 mt-6">
+              <Button variant="outline" className="min-w-[140px]">
+                <Users className="mr-2 h-4 w-4" />
+                I'm a Client
+              </Button>
+              <Button variant="outline" className="min-w-[140px]">
+                <Wrench className="mr-2 h-4 w-4" />
+                I'm a Professional
+              </Button>
+            </div>
+          </div>
+          
+          <div className="mt-16 relative">
+            {/* Connecting Line */}
+            <div className="absolute top-1/2 left-4 right-4 h-0.5 bg-primary/10 -translate-y-1/2 hidden lg:block" />
+            
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  step: 1,
+                  title: "Describe Your Needs",
+                  description: "Tell us what you're looking for - whether it's a website design or home repair",
+                  icon: Search,
+                  benefits: ["Smart matching algorithm", "Detailed project templates", "Instant cost estimates"],
+                  cta: "Browse Categories"
+                },
+                {
+                  step: 2,
+                  title: "Compare Professionals",
+                  description: "Review verified profiles, past work, and client feedback to find your perfect match",
+                  icon: CheckCircle2,
+                  benefits: ["Verified reviews", "Portfolio showcase", "Experience level indicators"],
+                  cta: "View Top Pros"
+                },
+                {
+                  step: 3,
+                  title: "Connect & Collaborate",
+                  description: "Discuss project details, timeline, and pricing with selected professionals",
+                  icon: Users,
+                  benefits: ["Secure messaging", "Video consultations", "Custom proposals"],
+                  cta: "Learn More"
+                },
+                {
+                  step: 4,
+                  title: "Complete Project",
+                  description: "Work gets done, payment is released only when you're 100% satisfied",
+                  icon: Lock,
+                  benefits: ["Secure payments", "Work guarantee", "Dispute resolution"],
+                  cta: "Get Started"
+                }
+              ].map((item) => (
+                <div key={item.step} className="relative group">
+                  <div className="flex flex-col h-full bg-card rounded-lg border p-6 hover:border-primary/50 transition-colors">
+                    {/* Step Number */}
+                    <div className="absolute -top-4 -left-4 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg">
+                      <span className="text-sm font-bold">{item.step}</span>
+                    </div>
+                    
+                    {/* Icon */}
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                      <item.icon className="h-6 w-6 text-primary" />
+                    </div>
+                    
+                    {/* Content */}
+                    <h3 className="text-lg font-semibold">{item.title}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground flex-grow">
+                      {item.description}
+                    </p>
+                    
+                    {/* Benefits */}
+                    <ul className="mt-4 space-y-2">
+                      {item.benefits.map((benefit, index) => (
+                        <li key={index} className="flex items-center text-xs text-muted-foreground">
+                          <CheckCircle2 className="mr-2 h-3 w-3 text-primary" />
+                          {benefit}
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    {/* CTA */}
+                    <Button variant="ghost" className="mt-4 w-full justify-between group-hover:bg-primary/5">
+                      {item.cta}
+                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center rounded-full border bg-muted px-4 py-1.5 text-sm text-muted-foreground">
+              <Star className="mr-2 h-4 w-4 text-primary" />
+              Join over 40,000 satisfied clients across Algeria
+            </div>
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button size="lg" className="min-w-[200px]">
+                Post a Project
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              <Button size="lg" variant="outline" className="min-w-[200px]">
+                Become a Professional
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Client Success Stories */}
+      <section className="bg-muted/50 py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Success Stories</h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Real projects, real results
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                client: "Tech Startup",
+                service: "Web Development",
+                professional: "Sarah Ahmed",
+                description: "Complete e-commerce platform built in 6 weeks",
+                result: "150% increase in online sales",
+                type: "digital"
+              },
+              {
+                client: "Villa Owner",
+                service: "Plumbing",
+                professional: "Ahmed Benali",
+                description: "Complete bathroom renovation",
+                result: "Completed 3 days ahead of schedule",
+                type: "home"
+              },
+              {
+                client: "Local Restaurant",
+                service: "Graphic Design",
+                professional: "Amina Kadi",
+                description: "Brand identity refresh",
+                result: "30% increase in customer engagement",
+                type: "digital"
+              }
+            ].map((story, index) => (
+              <Card key={index} className="overflow-hidden">
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <Badge variant={story.type === "digital" ? "default" : "secondary"}>
+                      {story.type === "digital" ? "Digital Service" : "Home Service"}
+                    </Badge>
+                    <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+                  </div>
+                  <h3 className="text-lg font-semibold">{story.client}</h3>
+                  <p className="text-sm text-primary mt-1">{story.service}</p>
+                  <p className="mt-4 text-sm text-muted-foreground">{story.description}</p>
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="text-sm font-medium">By {story.professional}</span>
+                    <Badge variant="outline" className="bg-green-500/10 text-green-600 border-green-200">
+                      {story.result}
+                    </Badge>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Top Professionals */}
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
