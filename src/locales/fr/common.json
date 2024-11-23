@@ -44,6 +44,14 @@
       "dark": "Sombre",
       "system": "Système"
     },
+    "language": {
+      "title": "Langue",
+      "current": "Langue actuelle : {{language}}",
+      "switch": "Passer à {{language}}",
+      "en": "English",
+      "fr": "Français",
+      "ar": "العربية"
+    },
     "welcome": {
       "authenticated": {
         "title": "{{name}}"
@@ -86,7 +94,30 @@
       "subtitle": "Connectez-vous avec des freelances talentueux et des prestataires de services locaux pour tous vos besoins numériques et d'amélioration de l'habitat",
       "popular": "Populaire",
       "search": {
-        "placeholder": "Quel service recherchez-vous ?"
+        "input": {
+          "placeholder": "Quel service recherchez-vous ?"
+        },
+        "filters": {
+          "categories": {
+            "title": "Catégories"
+          },
+          "budget": {
+            "title": "Budget",
+            "under": "Moins de {{amount}} DA",
+            "between": "{{min}} DA - {{max}} DA",
+            "above": "Plus de {{amount}} DA"
+          },
+          "experience": {
+            "title": "Niveau d'expérience"
+          },
+          "availability": {
+            "title": "Disponibilité"
+          },
+          "buttons": {
+            "reset": "Réinitialiser les filtres",
+            "show": "Afficher les résultats"
+          }
+        }
       }
     },
     "trust": {
@@ -151,9 +182,8 @@
     "description": "Gérer vos préférences et paramètres de compte",
     "language": {
       "title": "Langue",
-      "enDescription": "Utiliser l'anglais comme langue d'affichage",
-      "frDescription": "Utiliser le français comme langue d'affichage",
-      "arDescription": "Utiliser l'arabe comme langue d'affichage"
+      "description": "Choisissez votre langue préférée",
+      "system": "Utiliser la langue du système"
     },
     "theme": {
       "title": "Thème",

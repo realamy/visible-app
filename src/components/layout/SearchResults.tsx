@@ -1,4 +1,6 @@
 import { Service } from '@/types/service'
+import { getCategoryName } from '@/services/search'
+import { useLanguage } from '@/contexts/language-context'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -11,6 +13,8 @@ interface SearchResultsProps {
 }
 
 export function SearchResults({ results, isLoading, total }: SearchResultsProps) {
+  const { language } = useLanguage()
+
   if (isLoading) {
     return (
       <div className="space-y-4">
@@ -77,7 +81,7 @@ export function SearchResults({ results, isLoading, total }: SearchResultsProps)
                   </div>
                   <div className="flex items-center gap-1 text-muted-foreground">
                     <MapPin className="h-4 w-4" />
-                    {service.location}
+                    {getCategoryName(service.category, language)} • {service.location}
                   </div>
                 </div>
 

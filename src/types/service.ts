@@ -4,6 +4,10 @@ export interface Freelancer {
   avatar: string
   rating: number
   totalReviews: number
+  verified: boolean
+  yearsOfExperience: number
+  responseTime: string
+  languages: string[]
 }
 
 export interface Service {
@@ -13,7 +17,7 @@ export interface Service {
   price: number
   rating: number
   reviews: number
-  category: string
+  category: string // This is now a category ID (e.g., 'plumbing', 'painting', etc.)
   location: string
   freelancer: Freelancer
 }

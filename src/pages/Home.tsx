@@ -22,7 +22,7 @@ import { SearchSection } from '@/components/layout/SearchSection'
 import { Badge } from '@/components/ui/badge'
 import { useTranslation } from 'react-i18next'
 import { useLanguage } from '@/contexts/language-context'
-import { SupportedLanguages } from '@/types/i18next'
+import { LanguageCode } from '@/data/categories'
 
 // Define base translation type
 type CategoryTranslation = {
@@ -33,7 +33,7 @@ type CategoryTranslation = {
 // Define category with translations
 interface Category {
   id: number;
-  translations: { [key in SupportedLanguages]: CategoryTranslation };
+  translations: { [key in LanguageCode]: CategoryTranslation };
   icon: React.ElementType;
   count?: number;
   type?: string;
@@ -41,7 +41,7 @@ interface Category {
 
 function Home() {
   const { t } = useTranslation()
-  const { currentLanguage, direction } = useLanguage()
+  const { language, direction } = useLanguage()
   const [activeTab, setActiveTab] = useState('client')
 
   const popularCategories: Category[] = [
@@ -61,7 +61,7 @@ function Home() {
           title: "تطوير الويب",
           description: "مواقع وتطبيقات ويب مخصصة"
         }
-      } as { [key in SupportedLanguages]: CategoryTranslation },
+      },
       icon: Code,
       count: 245,
       type: "digital"
@@ -81,7 +81,7 @@ function Home() {
           title: "التصميم الجرافيكي",
           description: "الشعارات والعلامات التجارية والهوية البصرية"
         }
-      } as { [key in SupportedLanguages]: CategoryTranslation },
+      },
       icon: Palette,
       count: 189,
       type: "digital"
@@ -102,7 +102,7 @@ function Home() {
           title: "السباكة",
           description: "إصلاحات وتركيبات وصيانة"
         }
-      } as { [key in SupportedLanguages]: CategoryTranslation },
+      },
       icon: Wrench,
       count: 167,
       type: "home"
@@ -122,12 +122,13 @@ function Home() {
           title: "الكهرباء",
           description: "الأسلاك والتركيبات والإصلاحات"
         }
-      } as { [key in SupportedLanguages]: CategoryTranslation },
+      },
       icon: Zap,
       count: 134,
       type: "home"
     }
   ]
+
   const features = [
     {
       id: 1,
@@ -144,7 +145,7 @@ function Home() {
           title: "المواهب المحلية",
           description: "تواصل مع المحترفين الجزائريين المهرة"
         }
-      } as { [key in SupportedLanguages]: CategoryTranslation },
+      },
       icon: Users
     },
     {
@@ -162,7 +163,7 @@ function Home() {
           title: "مدفوعات آمنة",
           description: "معالجة آمنة وموثوقة للمدفوعات"
         }
-      } as { [key in SupportedLanguages]: CategoryTranslation },
+      },
       icon: Lock
     },
     {
@@ -180,10 +181,11 @@ function Home() {
           title: "عمل عالي الجودة",
           description: "رضا مضمون مع كل مشروع"
         }
-      } as { [key in SupportedLanguages]: CategoryTranslation },
+      },
       icon: CheckCircle2
     }
   ]
+
   const topProfessionals = [
     {
       id: 1,
@@ -219,16 +221,15 @@ function Home() {
 
   const translatedPopularCategories = popularCategories.map(category => ({
     ...category,
-    title: category.translations[currentLanguage as SupportedLanguages].title,
-    description: category.translations[currentLanguage as SupportedLanguages].description
+    title: category.translations[language].title,
+    description: category.translations[language].description
   }))
 
   const translatedFeatures = features.map(feature => ({
     ...feature,
-    title: feature.translations[currentLanguage as SupportedLanguages].title,
-    description: feature.translations[currentLanguage as SupportedLanguages].description
+    title: feature.translations[language].title,
+    description: feature.translations[language].description
   }))
-
 
   return (
     <div className="min-h-screen bg-background">

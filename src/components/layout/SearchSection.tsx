@@ -21,9 +21,11 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from "@/components/ui/label"
 import { SearchResults } from './SearchResults'
 import { searchServices } from '@/services/search'
-import { serviceCategories } from '@/services/search'
+import { serviceCategories } from '@/data/categories'
 import { Service } from '@/types/service'
 import { useState, useCallback, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useLanguage } from '@/contexts/language-context'
 
 interface FilterState {
   categories: string[]
@@ -70,6 +72,8 @@ const availabilityOptions = [
 ]
 
 export function SearchSection() {
+  const { t } = useTranslation()
+  const { language } = useLanguage()
   const [filters, setFilters] = useState<FilterState>(initialFilterState)
   const [showFilters, setShowFilters] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -135,7 +139,7 @@ export function SearchSection() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="What service are you looking for?"
+              placeholder={t('search.input.placeholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => {
@@ -184,7 +188,7 @@ export function SearchSection() {
               size="lg"
             >
               <Search className="h-4 w-4" />
-              <span>Search</span>
+              <span>{t('search.buttons.search')}</span>
             </Button>
           </div>
         </div>
@@ -196,7 +200,7 @@ export function SearchSection() {
             className="flex-1 gap-2"
           >
             <Map className="h-4 w-4" />
-            <span>View Map</span>
+            <span>{t('search.buttons.viewMap')}</span>
           </Button>
 
           <Button 
@@ -205,7 +209,7 @@ export function SearchSection() {
             className="flex-1 gap-2"
           >
             <SlidersHorizontal className="h-4 w-4" />
-            <span>Filters</span>
+            <span>{t('search.buttons.filters')}</span>
           </Button>
         </div>
       </div>
@@ -304,27 +308,27 @@ export function SearchSection() {
       <Sheet open={showFilters} onOpenChange={setShowFilters}>
         <SheetContent side="right" className="w-full sm:max-w-lg">
           <SheetHeader>
-            <SheetTitle>Filter Services</SheetTitle>
+            <SheetTitle>{t('search.filters.title')}</SheetTitle>
           </SheetHeader>
           
           <Accordion type="single" collapsible className="w-full">
             {/* Categories */}
             <AccordionItem value="categories">
-              <AccordionTrigger>Service Categories</AccordionTrigger>
+              <AccordionTrigger>{t('search.filters.categories.title')}</AccordionTrigger>
               <AccordionContent>
                 <div className="grid grid-cols-2 gap-2">
                   {serviceCategories.map((category) => (
-                    <div key={category} className="flex items-center space-x-2">
+                    <div key={category.id} className="flex items-center space-x-2">
                       <Checkbox
-                        id={category}
-                        checked={filters.categories.includes(category)}
-                        onCheckedChange={() => toggleArrayFilter('categories', category)}
+                        id={category.id}
+                        checked={filters.categories.includes(category.id)}
+                        onCheckedChange={() => toggleArrayFilter('categories', category.id)}
                       />
                       <label
-                        htmlFor={category}
+                        htmlFor={category.id}
                         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                       >
-                        {category}
+                        {category.translations[language]}
                       </label>
                     </div>
                   ))}
@@ -334,7 +338,7 @@ export function SearchSection() {
 
             {/* Budget */}
             <AccordionItem value="budget">
-              <AccordionTrigger>Budget Range</AccordionTrigger>
+              <AccordionTrigger>{t('search.filters.budget.title')}</AccordionTrigger>
               <AccordionContent>
                 <div className="space-y-2">
                   <RadioGroup
@@ -343,15 +347,15 @@ export function SearchSection() {
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="low" id="budget-low" />
-                      <Label htmlFor="budget-low">Under 2000 DA</Label>
+                      <Label htmlFor="budget-low">{t('search.filters.budget.under')}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="mid" id="budget-mid" />
-                      <Label htmlFor="budget-mid">2000 - 5000 DA</Label>
+                      <Label htmlFor="budget-mid">{t('search.filters.budget.between')}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="high" id="budget-high" />
-                      <Label htmlFor="budget-high">Above 5000 DA</Label>
+                      <Label htmlFor="budget-high">{t('search.filters.budget.above')}</Label>
                     </div>
                   </RadioGroup>
                 </div>
@@ -360,7 +364,7 @@ export function SearchSection() {
 
             {/* Experience Level */}
             <AccordionItem value="experience">
-              <AccordionTrigger>Experience Level</AccordionTrigger>
+              <AccordionTrigger>{t('search.filters.experience.title')}</AccordionTrigger>
               <AccordionContent>
                 <RadioGroup
                   value={filters.experience}
@@ -378,7 +382,7 @@ export function SearchSection() {
 
             {/* Availability */}
             <AccordionItem value="availability">
-              <AccordionTrigger>Availability</AccordionTrigger>
+              <AccordionTrigger>{t('search.filters.availability.title')}</AccordionTrigger>
               <AccordionContent>
                 <RadioGroup
                   value={filters.availability}
@@ -398,13 +402,13 @@ export function SearchSection() {
           <SheetFooter className="absolute bottom-0 left-0 right-0 p-4 border-t">
             <div className="flex justify-between w-full">
               <Button variant="outline" onClick={resetFilters}>
-                Reset Filters
+                {t('search.filters.buttons.reset')}
               </Button>
               <Button onClick={() => {
                 setShowFilters(false)
                 handleSearch()
               }}>
-                Show Results
+                {t('search.filters.buttons.show')}
               </Button>
             </div>
           </SheetFooter>

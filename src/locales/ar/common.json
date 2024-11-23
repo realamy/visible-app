@@ -44,6 +44,14 @@
       "dark": "داكن",
       "system": "النظام"
     },
+    "language": {
+      "title": "اللغة",
+      "current": "اللغة الحالية: {{language}}",
+      "switch": "التبديل إلى {{language}}",
+      "en": "الإنجليزية",
+      "fr": "الفرنسية",
+      "ar": "العربية"
+    },
     "welcome": {
       "authenticated": {
         "title": "{{name}}"
@@ -196,6 +204,41 @@
       "bottomCta": {
         "postProject": "نشر مشروع",
         "becomeProfessional": "كن محترفاً"
+      }
+    }
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "description": "إدارة تفضيلات وإعدادات حسابك",
+    "language": {
+      "title": "اللغة",
+      "description": "اختر لغتك المفضلة",
+      "system": "استخدم لغة النظام"
+    }
+  },
+  "search": {
+    "input": {
+      "placeholder": "ما هي الخدمة التي تبحث عنها؟"
+    },
+    "filters": {
+      "categories": {
+        "title": "الفئات"
+      },
+      "budget": {
+        "title": "الميزانية",
+        "under": "أقل من {{amount}} دج",
+        "between": "{{min}} دج - {{max}} دج",
+        "above": "أكثر من {{amount}} دج"
+      },
+      "experience": {
+        "title": "مستوى الخبرة"
+      },
+      "availability": {
+        "title": "التوفر"
+      },
+      "buttons": {
+        "reset": "إعادة تعيين الفلاتر",
+        "show": "عرض النتائج"
       }
     }
   }

@@ -1,4 +1,5 @@
 import { Service } from '@/types/service'
+import { serviceCategories, LanguageCode } from '@/data/categories'
 
 export interface SearchFilters {
   categories: string[]
@@ -14,24 +15,11 @@ export interface SearchResult {
   pageSize: number
 }
 
-// Common categories for home services and handymen
-export const serviceCategories = [
-  'Plumbing',
-  'Electrical Work',
-  'Painting',
-  'Carpentry',
-  'Home Renovation',
-  'Cleaning',
-  'Moving Services',
-  'Gardening',
-  'HVAC',
-  'Appliance Repair',
-  'Masonry',
-  'Tiling',
-  'Roofing',
-  'Security Systems',
-  'Interior Design'
-]
+// Get category name by ID and language
+export function getCategoryName(id: string, language: LanguageCode) {
+  const category = serviceCategories.find(cat => cat.id === id)
+  return category ? category.translations[language] : id
+}
 
 export async function searchServices(
   query: string,
@@ -51,7 +39,7 @@ export async function searchServices(
       price: 2500,
       rating: 4.8,
       reviews: 127,
-      category: 'Plumbing',
+      category: 'plumbing',
       location: 'Algiers',
       freelancer: {
         id: '1',
@@ -72,7 +60,7 @@ export async function searchServices(
       price: 3000,
       rating: 4.7,
       reviews: 98,
-      category: 'Painting',
+      category: 'painting',
       location: 'Oran',
       freelancer: {
         id: '2',
@@ -93,105 +81,49 @@ export async function searchServices(
       price: 15000,
       rating: 4.9,
       reviews: 75,
-      category: 'Home Renovation',
+      category: 'renovation',
       location: 'Constantine',
       freelancer: {
         id: '3',
         name: 'Mohamed Larbi',
         avatar: 'https://ui-avatars.com/api/?name=Mohamed+Larbi',
-        rating: 5.0,
+        rating: 4.7,
         totalReviews: 89,
         verified: true,
         yearsOfExperience: 12,
-        responseTime: '1 hour',
-        languages: ['Arabic', 'French']
-      }
-    },
-    {
-      id: '4',
-      title: 'Professional Electrician',
-      description: 'Licensed electrician for all electrical installations and repairs. Safety first!',
-      price: 2000,
-      rating: 4.8,
-      reviews: 112,
-      category: 'Electrical Work',
-      location: 'Setif',
-      freelancer: {
-        id: '4',
-        name: 'Sofiane Boudjema',
-        avatar: 'https://ui-avatars.com/api/?name=Sofiane+Boudjema',
-        rating: 4.7,
-        totalReviews: 156,
-        verified: true,
-        yearsOfExperience: 6,
-        responseTime: '30 minutes',
-        languages: ['Arabic', 'French']
-      }
-    },
-    {
-      id: '5',
-      title: 'Garden Maintenance Services',
-      description: 'Professional gardening, lawn care, and landscape maintenance services.',
-      price: 1800,
-      rating: 4.6,
-      reviews: 67,
-      category: 'Gardening',
-      location: 'Blida',
-      freelancer: {
-        id: '5',
-        name: 'Amina Kadi',
-        avatar: 'https://ui-avatars.com/api/?name=Amina+Kadi',
-        rating: 4.8,
-        totalReviews: 82,
-        verified: true,
-        yearsOfExperience: 4,
-        responseTime: '1 hour',
+        responseTime: '3 hours',
         languages: ['Arabic', 'French']
       }
     }
   ]
 
-  // Filter logic
-  let filteredServices = mockServices.filter(service => {
-    const matchesQuery = !query || 
-      service.title.toLowerCase().includes(query.toLowerCase()) ||
-      service.description.toLowerCase().includes(query.toLowerCase())
+  // Filter services based on search criteria
+  let filteredServices = [...mockServices]
 
-    const matchesCategory = !filters.categories.length || 
+  if (query) {
+    const searchLower = query.toLowerCase()
+    filteredServices = filteredServices.filter(service =>
+      service.title.toLowerCase().includes(searchLower) ||
+      service.description.toLowerCase().includes(searchLower)
+    )
+  }
+
+  if (filters.categories.length > 0) {
+    filteredServices = filteredServices.filter(service =>
       filters.categories.includes(service.category)
+    )
+  }
 
-    const matchesLocation = !filters.location || 
+  if (filters.location) {
+    filteredServices = filteredServices.filter(service =>
       service.location.toLowerCase() === filters.location.toLowerCase()
+    )
+  }
 
-    const matchesBudget = !filters.budget || (() => {
-      switch(filters.budget) {
-        case 'low':
-          return service.price <= 2000
-        case 'mid':
-          return service.price > 2000 && service.price <= 5000
-        case 'high':
-          return service.price > 5000
-        default:
-          return true
-      }
-    })()
-
-    return matchesQuery && matchesCategory && matchesLocation && matchesBudget
-  })
-
-  // Sort by rating and reviews
-  filteredServices.sort((a, b) => {
-    // First by rating
-    if (b.rating !== a.rating) {
-      return b.rating - a.rating
-    }
-    // Then by number of reviews
-    return b.reviews - a.reviews
-  })
-
-  // Pagination
-  const start = (page - 1) * pageSize
-  const paginatedServices = filteredServices.slice(start, start + pageSize)
+  // Calculate pagination
+  const startIndex = (page - 1) * pageSize
+  const endIndex = startIndex + pageSize
+  const paginatedServices = filteredServices.slice(startIndex, endIndex)
 
   return {
     services: paginatedServices,

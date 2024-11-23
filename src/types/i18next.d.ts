@@ -27,6 +27,9 @@ export interface Namespaces {
 // Define translation function return type
 type TranslationValue = string | number | Array<string> | { [key: string]: string };
 
+// Define all translation keys
+export type TranslationKeys = RecursiveKeyOf<typeof commonEn>;
+
 declare module 'i18next' {
     interface CustomTypeOptions {
         defaultNS: 'common';
@@ -34,7 +37,7 @@ declare module 'i18next' {
         returnNull: false;
         keySeparator: '.';
         // Support for nested keys with better type inference
-        key: RecursiveKeyOf<Namespaces[keyof Namespaces]>;
+        key: TranslationKeys;
         // Define return type for translation function
         returnType: TranslationValue;
     }
