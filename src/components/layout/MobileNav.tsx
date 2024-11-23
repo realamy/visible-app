@@ -191,12 +191,32 @@ const MobileNav = () => {
 
   // Handle scroll blocking
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
+    const handleResize = () => {
+      if (window.innerWidth >= 768) { // md breakpoint
+        setIsMobileMenuOpen(false)
+      }
     }
-  }, [isMobileMenuOpen])
+
+    const updateScrollLock = () => {
+      if (isMobileMenuOpen) {
+        document.body.style.overflow = 'hidden'
+      } else {
+        document.body.style.overflow = ''
+      }
+    }
+
+    // Add resize listener
+    window.addEventListener('resize', handleResize)
+    
+    // Update scroll lock when menu state changes
+    updateScrollLock()
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      document.body.style.overflow = '' // Reset scroll on unmount
+    }
+  }, [isMobileMenuOpen, setIsMobileMenuOpen])
 
   return (
     <>
@@ -272,52 +292,35 @@ const MobileNav = () => {
               </div>
             ))}
 
-            {/* Theme Section */}
-            <div className="mb-6">
-              <h3 className="text-sm font-medium text-muted-foreground px-2 mb-3">
-                {t('menu.settings.title')}
-              </h3>
-              <div className="space-y-1 px-2">
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-full flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 rounded-lg transition-colors
-                    hover:bg-muted/50 active:bg-muted"
-                >
-                  <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Settings className="w-4 h-4 text-primary" />
-                  </div>
-                  <div className="flex-1 min-w-0 text-start">
-                    <div className="font-medium truncate">{t('menu.settings.appearance')}</div>
-                    <p className="text-sm text-muted-foreground truncate">
-                      {t('menu.settings.appearanceDesc')}
-                    </p>
-                  </div>
-                </button>
+         {/* Theme Section */}
+         <div className="mb-6">
+                <h3 className="text-sm font-medium text-muted-foreground px-2 mb-3">
+                  {t('menu.theme.title')}
+                </h3>
+                <div className="grid grid-cols-3 gap-2 px-2">
+                  {themeOptions.map((option) => {
+                    const Icon = option.icon
+                    const isActive = theme === option.value
+                    return (
+                      <button
+                        key={option.value}
+                        className={cn(
+                          "flex flex-col items-center justify-center p-3 rounded-lg gap-2 transition-colors",
+                          "hover:bg-muted/50 active:bg-muted",
+                          isActive && "bg-muted"
+                        )}
+                        onClick={() => setTheme(option.value)}
+                      >
+                        <Icon className={cn("h-5 w-5", isActive && "text-primary")} />
+                        <span className={cn("text-xs", isActive && "font-medium text-primary")}>
+                          {option.name}
+                        </span>
+                      </button>
+                    )
+                  })}
+                </div>
               </div>
-              <div className="grid grid-cols-3 gap-2 px-2 mt-3">
-                {themeOptions.map((option) => {
-                  const Icon = option.icon
-                  const isActive = theme === option.value
-                  return (
-                    <button
-                      key={option.value}
-                      className={cn(
-                        "flex flex-col items-center justify-center p-3 rounded-lg gap-2 transition-colors",
-                        "hover:bg-muted/50 active:bg-muted",
-                        isActive && "bg-muted"
-                      )}
-                      onClick={() => setTheme(option.value)}
-                    >
-                      <Icon className={cn("h-5 w-5", isActive && "text-primary")} />
-                      <span className={cn("text-xs", isActive && "font-medium text-primary")}>
-                        {option.name}
-                      </span>
-                    </button>
-                  )
-                })}
-              </div>
-            </div>
-
+              
             {/* Language Section */}
             <div className="px-2 py-2 mb-16">
               <h3 className="text-sm font-medium text-muted-foreground px-2 mb-2">

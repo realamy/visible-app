@@ -207,6 +207,45 @@
       }
     }
   },
+  "dashboard": {
+    "nav": {
+      "overview": "نظرة عامة",
+      "projects": "المشاريع",
+      "messages": "الرسائل",
+      "earnings": "الأرباح",
+      "reviews": "التقييمات",
+      "availability": "التوفر",
+      "settings": "الإعدادات"
+    },
+    "overview": {
+      "title": "لوحة التحكم",
+      "subtitle": "مرحباً بعودتك! إليك ما يحدث في مشاريعك."
+    },
+    "actions": {
+      "editProfile": "تعديل الملف الشخصي",
+      "viewProfile": "عرض الملف الشخصي"
+    },
+    "stats": {
+      "activeProjects": "المشاريع النشطة",
+      "activeProjectsDesc": "المشاريع قيد التنفيذ",
+      "earnings": "إجمالي الأرباح",
+      "earningsDesc": "أرباح هذا الشهر",
+      "messages": "الرسائل الجديدة",
+      "messagesDesc": "الرسائل غير المقروءة",
+      "rating": "متوسط التقييم",
+      "ratingDesc": "من جميع التقييمات",
+      "fromLastMonth": "مقارنة بالشهر الماضي"
+    },
+    "recentActivity": {
+      "title": "النشاط الأخير",
+      "empty": "لا يوجد نشاط حديث"
+    },
+    "earnings": {
+      "title": "نظرة عامة على الأرباح",
+      "viewReport": "عرض التقرير",
+      "chartPlaceholder": "الرسم البياني للأرباح قريباً"
+    }
+  },
   "settings": {
     "title": "الإعدادات",
     "description": "إدارة تفضيلات وإعدادات حسابك",

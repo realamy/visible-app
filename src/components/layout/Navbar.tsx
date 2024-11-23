@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { useNavigation } from '@/contexts/navigation-context'
-import { ThemeToggle } from '@/components/theme-toggle'
 import { cn } from '@/lib/utils'
 import { LogoWithEyeIteration } from "@/components/Logo/Logo"
 import { useTranslation } from "react-i18next"

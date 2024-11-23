@@ -177,6 +177,45 @@
       }
     }
   },
+  "dashboard": {
+    "nav": {
+      "overview": "Vue d'ensemble",
+      "projects": "Projets",
+      "messages": "Messages",
+      "earnings": "Gains",
+      "reviews": "Avis",
+      "availability": "Disponibilité",
+      "settings": "Paramètres"
+    },
+    "overview": {
+      "title": "Tableau de bord",
+      "subtitle": "Bon retour ! Voici ce qui se passe avec vos projets."
+    },
+    "actions": {
+      "editProfile": "Modifier le profil",
+      "viewProfile": "Voir le profil"
+    },
+    "stats": {
+      "activeProjects": "Projets actifs",
+      "activeProjectsDesc": "Projets en cours",
+      "earnings": "Gains totaux",
+      "earningsDesc": "Gains du mois",
+      "messages": "Nouveaux messages",
+      "messagesDesc": "Messages non lus",
+      "rating": "Note moyenne",
+      "ratingDesc": "De tous les avis",
+      "fromLastMonth": "par rapport au mois dernier"
+    },
+    "recentActivity": {
+      "title": "Activité récente",
+      "empty": "Aucune activité récente à afficher"
+    },
+    "earnings": {
+      "title": "Aperçu des gains",
+      "viewReport": "Voir le rapport",
+      "chartPlaceholder": "Graphique des gains bientôt disponible"
+    }
+  },
   "settings": {
     "title": "Paramètres",
     "description": "Gérer vos préférences et paramètres de compte",

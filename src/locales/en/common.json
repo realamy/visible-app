@@ -60,6 +60,17 @@
         "title": "Welcome to Visible",
         "subtitle": "Sign in to access all features"
       }
+    },
+    "settings": {
+      "title": "Settings",
+      "appearance": "Appearance",
+      "appearanceDesc": "Customize the look and feel of the application",
+      "general": "General Settings",
+      "generalDesc": "Manage your general preferences",
+      "notifications": "Notifications",
+      "notificationsDesc": "Control your notification preferences",
+      "privacy": "Privacy & Security",
+      "privacyDesc": "Manage your privacy and security settings"
     }
   },
   "brand": {
@@ -316,6 +327,45 @@
         "description": "Choose your preferred language",
         "system": "Use system language"
       }
+    }
+  },
+  "dashboard": {
+    "nav": {
+      "overview": "Overview",
+      "projects": "Projects",
+      "messages": "Messages",
+      "earnings": "Earnings",
+      "reviews": "Reviews",
+      "availability": "Availability",
+      "settings": "Settings"
+    },
+    "overview": {
+      "title": "Dashboard",
+      "subtitle": "Welcome back! Here's what's happening with your projects."
+    },
+    "actions": {
+      "editProfile": "Edit Profile",
+      "viewProfile": "View Profile"
+    },
+    "stats": {
+      "activeProjects": "Active Projects",
+      "activeProjectsDesc": "Projects in progress",
+      "earnings": "Total Earnings",
+      "earningsDesc": "This month's earnings",
+      "messages": "New Messages",
+      "messagesDesc": "Unread messages",
+      "rating": "Average Rating",
+      "ratingDesc": "From all reviews",
+      "fromLastMonth": "from last month"
+    },
+    "recentActivity": {
+      "title": "Recent Activity",
+      "empty": "No recent activity to show"
+    },
+    "earnings": {
+      "title": "Earnings Overview",
+      "viewReport": "View Report",
+      "chartPlaceholder": "Earnings chart coming soon"
     }
   },
   "search": {
