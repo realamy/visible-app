@@ -159,9 +159,7 @@ const Navbar = () => {
 
         {/* Right Section - Theme & Auth (Hidden on mobile) */}
         <div className="hidden md:flex items-center space-x-4">
-          <div className="hidden md:block">
-            <ThemeToggle size="sm" />
-          </div>
+
           {isAuthenticated ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

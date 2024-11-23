@@ -12,6 +12,11 @@ export default {
   		}
   	},
   	extend: {
+  		fontFamily: {
+  			sans: ['Inter var', 'Inter', 'system-ui', 'sans-serif'],
+  			arabic: ['Noto Sans Arabic', 'system-ui', 'sans-serif'],
+  			'noto-arabic': ['Noto Sans Arabic', 'sans-serif'],
+  		},
   		colors: {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
@@ -56,10 +61,6 @@ export default {
   				border: 'hsl(var(--sidebar-border))',
   				ring: 'hsl(var(--sidebar-ring))'
   			}
-  		},
-  		fontFamily: {
-  			sans: ['Inter var', 'Inter', 'system-ui', 'sans-serif'],
-  			arabic: ['Noto Sans Arabic', 'system-ui', 'sans-serif'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

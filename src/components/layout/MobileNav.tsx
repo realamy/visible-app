@@ -203,173 +203,173 @@ const MobileNav = () => {
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div className="fixed inset-x-0 top-0 bottom-0 z-40 bg-background md:hidden">
-          <div className="h-full flex flex-col">
-            {/* Title Section */}
-            <div className="flex-shrink-0 px-6 h-16 flex items-center justify-between border-b">
-              <span className="text-xl font-semibold">{t('menu.title')}</span>
-            </div>
+        <div className="h-full flex flex-col">
+          {/* Title Section */}
+          <div className="flex-shrink-0 px-4 h-16 flex items-center justify-between border-b">
+            <span className="text-2xl font-semibold">{t('menu.title')}</span>
+          </div>
 
-            {/* User Profile Section */}
-            <div className="flex-shrink-0 p-6 border-b bg-muted/10">
-              <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center ring-2 ring-primary/20">
-                  <UserCircle className="w-7 h-7 text-primary" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  {isAuthenticated ? (
-                    <div>
-                      <h2 className="font-semibold text-lg truncate">
-                        {t('menu.welcome.authenticated.title', { name: user.name })}
-                      </h2>
-                      <p className="text-sm text-muted-foreground truncate">{user.email}</p>
-                    </div>
-                  ) : (
-                    <>
-                      <h2 className="font-semibold text-lg truncate">{t('menu.welcome.guest.title')}</h2>
-                      <p className="text-sm text-muted-foreground truncate">{t('menu.welcome.guest.subtitle')}</p>
-                    </>
-                  )}
-                </div>
+          {/* User Profile Section */}
+          <div className="flex-shrink-0 p-4 border-b">
+            <div className="flex items-center space-x-4">
+              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center ring-2 ring-primary/20">
+                <UserCircle className="w-7 h-7 text-primary" />
               </div>
-            </div>
-
-            {/* Menu Sections - Scrollable */}
-            <div className="flex-1 overflow-y-auto py-4 px-4">
-              {menuSections.map((section) => (
-                <div key={section.title} className="mb-6">
-                  <h3 className="text-sm font-medium text-muted-foreground px-2 mb-2">
-                    {section.title}
-                  </h3>
-                  <div className="space-y-1">
-                    {section.items.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.href}
-                        onClick={() => {
-                          if (item.onClick) {
-                            item.onClick()
-                          } else {
-                            setIsMobileMenuOpen(false)
-                          }
-                        }}
-                        className={cn(
-                          "flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 rounded-lg transition-colors",
-                          "hover:bg-muted/50 active:bg-muted",
-                          item.className
-                        )}
-                      >
-                        <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                          <item.icon className="w-4 h-4 text-primary" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="font-medium truncate">{item.name}</div>
-                          {item.description && (
-                            <p className="text-sm text-muted-foreground truncate">
-                              {item.description}
-                            </p>
-                          )}
-                        </div>
-                      </Link>
-                    ))}
+              <div className="flex-1">
+                {isAuthenticated ? (
+                  <div>
+                    <h2 className="font-semibold text-lg">
+                      {t('menu.welcome.authenticated.title', { name: user.name })}
+                    </h2>
+                    <p className="text-sm text-muted-foreground">{user.email}</p>
                   </div>
-                </div>
-              ))}
-
-              {/* Theme Section */}
-              <div className="mb-6">
-                <h3 className="text-sm font-medium text-muted-foreground px-2 mb-3">
-                  {t('menu.theme.title')}
-                </h3>
-                <div className="grid grid-cols-3 gap-2 px-2">
-                  {themeOptions.map((option) => {
-                    const Icon = option.icon
-                    const isActive = theme === option.value
-                    return (
-                      <button
-                        key={option.value}
-                        className={cn(
-                          "flex flex-col items-center justify-center p-3 rounded-lg gap-2 transition-colors",
-                          "hover:bg-muted/50 active:bg-muted",
-                          isActive && "bg-muted"
-                        )}
-                        onClick={() => setTheme(option.value)}
-                      >
-                        <Icon className={cn("h-5 w-5", isActive && "text-primary")} />
-                        <span className={cn("text-xs", isActive && "font-medium text-primary")}>
-                          {option.name}
-                        </span>
-                      </button>
-                    )
-                  })}
-                </div>
+                ) : (
+                  <>
+                    <h2 className="font-semibold text-lg">{t('menu.welcome.guest.title')}</h2>
+                    <p className="text-sm text-muted-foreground">{t('menu.welcome.guest.subtitle')}</p>
+                  </>
+                )}
               </div>
+            </div>
+          </div>
 
-              {/* Language Section */}
-              <div className="mb-6">
-                <h3 className="text-sm font-medium text-muted-foreground px-2 mb-3">
-                  {t('menu.language.title')}
+          {/* Menu Sections - Scrollable */}
+          <div className="flex-1 overflow-y-auto py-2 px-2">
+            {menuSections.map((section) => (
+              <div key={section.title} className="mb-4">
+                <h3 className="text-sm font-medium text-muted-foreground px-2 mb-1">
+                  {section.title}
                 </h3>
-                <div className="space-y-1 px-2">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
+                <div className="space-y-0.5">
+                  {section.items.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      onClick={() => {
+                        if (item.onClick) {
+                          item.onClick()
+                        } else {
+                          setIsMobileMenuOpen(false)
+                        }
+                      }}
                       className={cn(
-                        "w-full flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 rounded-lg transition-colors",
-                        "hover:bg-muted/50 active:bg-muted",
-                        language === lang.code && "bg-muted"
+                        "flex items-center space-x-3 px-3 py-3 rounded-lg hover:bg-accent transition-colors",
+                        item.className
                       )}
-                      onClick={() => setLanguage(lang.code)}
                     >
-                      <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                        <Globe className={cn("w-4 h-4", language === lang.code && "text-primary")} />
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                        <item.icon className="w-4 h-4 text-primary" />
                       </div>
-                      <div className="flex-1 min-w-0 text-start">
-                        <div className={cn("font-medium truncate", language === lang.code && "text-primary")}>
-                          {lang.name}
-                        </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-medium truncate">{item.name}</div>
                         <p className="text-sm text-muted-foreground truncate">
-                          {language === lang.code 
-                            ? t('menu.language.current', { language: lang.name })
-                            : t('menu.language.switch', { language: lang.name })}
+                          {item.description}
                         </p>
                       </div>
-                    </button>
+                    </Link>
                   ))}
                 </div>
               </div>
+            ))}
 
-              {/* Sign Out Button - Only for authenticated users */}
-              {isAuthenticated && (
-                <div className="mb-6">
-                  <h3 className="text-sm font-medium text-muted-foreground px-2 mb-3">
-                    {t('menu.sections.account.title')}
-                  </h3>
-                  <div className="space-y-1 px-2">
-                    <button
-                      onClick={() => {
-                        logout()
-                        setIsMobileMenuOpen(false)
-                      }}
-                      className="w-full flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 rounded-lg
-                        text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/50
-                        transition-colors"
-                    >
-                      <div className="flex-shrink-0 w-9 h-9 rounded-full bg-red-500/10 flex items-center justify-center">
-                        <LogOut className="w-4 h-4 text-red-500" />
-                      </div>
-                      <div className="flex-1 min-w-0 text-start">
-                        <div className="font-medium truncate">{t('menu.sections.account.signOut')}</div>
-                        <p className="text-sm text-muted-foreground truncate">
-                          {t('menu.sections.account.signOutDesc')}
-                        </p>
-                      </div>
-                    </button>
+            {/* Theme Section */}
+            <div className="mb-6">
+              <h3 className="text-sm font-medium text-muted-foreground px-2 mb-3">
+                {t('menu.settings.title')}
+              </h3>
+              <div className="space-y-1 px-2">
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 rounded-lg transition-colors
+                    hover:bg-muted/50 active:bg-muted"
+                >
+                  <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Settings className="w-4 h-4 text-primary" />
                   </div>
-                </div>
-              )}
+                  <div className="flex-1 min-w-0 text-start">
+                    <div className="font-medium truncate">{t('menu.settings.appearance')}</div>
+                    <p className="text-sm text-muted-foreground truncate">
+                      {t('menu.settings.appearanceDesc')}
+                    </p>
+                  </div>
+                </button>
+              </div>
+              <div className="grid grid-cols-3 gap-2 px-2 mt-3">
+                {themeOptions.map((option) => {
+                  const Icon = option.icon
+                  const isActive = theme === option.value
+                  return (
+                    <button
+                      key={option.value}
+                      className={cn(
+                        "flex flex-col items-center justify-center p-3 rounded-lg gap-2 transition-colors",
+                        "hover:bg-muted/50 active:bg-muted",
+                        isActive && "bg-muted"
+                      )}
+                      onClick={() => setTheme(option.value)}
+                    >
+                      <Icon className={cn("h-5 w-5", isActive && "text-primary")} />
+                      <span className={cn("text-xs", isActive && "font-medium text-primary")}>
+                        {option.name}
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
             </div>
+
+            {/* Language Section */}
+            <div className="px-2 py-2 mb-16">
+              <h3 className="text-sm font-medium text-muted-foreground px-2 mb-2">
+                {t('menu.language.title')}
+              </h3>
+              <div className="space-y-1">
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    className={cn(
+                      "w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-accent transition-colors",
+                      language === lang.code && "bg-accent"
+                    )}
+                    onClick={() => setLanguage(lang.code)}
+                  >
+                    <Globe className="w-4 h-4" />
+                    <span>{lang.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Sign Out Button - Only for authenticated users */}
+            {isAuthenticated && (
+              <div className="px-2 py-2 mb-16">
+                <h3 className="text-sm font-medium text-muted-foreground px-2 mb-1">
+                  {t('menu.sections.account.title')}
+                </h3>
+                <div className="space-y-0.5">
+                  <button
+                    onClick={() => {
+                      logout()
+                      setIsMobileMenuOpen(false)
+                    }}
+                    className="w-full flex items-center space-x-3 px-3 py-3 rounded-lg hover:bg-accent transition-colors text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/50"
+                  >
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center">
+                      <LogOut className="w-4 h-4 text-red-500" />
+                    </div>
+                    <div className="flex-1 min-w-0 text-left rtl:text-right">
+                      <div className="font-medium truncate">{t('menu.sections.account.signOut')}</div>
+                      <p className="text-sm text-muted-foreground truncate">
+                        {t('menu.sections.account.signOutDesc')}
+                      </p>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
+      </div>
       )}
 
       {/* Bottom Navigation */}

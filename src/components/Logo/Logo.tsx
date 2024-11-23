@@ -2,9 +2,12 @@ import { Eye, Lightbulb, Stars } from "lucide-react";
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/language-context";
 
 export function LogoWithSpotlightIteration() {
   const { t } = useTranslation();
+  const { language } = useLanguage();
+  const isArabic = language === 'ar';
   
   return (
     <div className="flex items-center gap-3">
@@ -15,10 +18,18 @@ export function LogoWithSpotlightIteration() {
         <Stars className="w-4 h-4 absolute -top-1 -right-1 text-yellow-400" />
       </div>
       <div className="flex flex-col gap-0.5">
-        <span className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-green-600 leading-none">
+        <span className={cn(
+          "text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-green-600 leading-none",
+          isArabic && "font-noto-arabic text-2xl tracking-normal"
+        )}>
           {t('brand.name')}
         </span>
-        <span className="text-xs text-muted-foreground leading-none">{t('brand.slogan.illuminate')}</span>
+        <span className={cn(
+          "text-xs text-muted-foreground leading-none",
+          isArabic && "font-noto-arabic"
+        )}>
+          {t('brand.slogan.illuminate')}
+        </span>
       </div>
     </div>
   );
@@ -26,6 +37,8 @@ export function LogoWithSpotlightIteration() {
 
 export const LogoWithEyeIteration = () => {
   const { t } = useTranslation();
+  const { language } = useLanguage();
+  const isArabic = language === 'ar';
   
   return (
     <Link 
@@ -45,12 +58,18 @@ export const LogoWithEyeIteration = () => {
         </div>
       </div>
       <div className="flex flex-col gap-0.5">
-        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-emerald-600 leading-none">
+        <span className={cn(
+          "text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-emerald-600 leading-none",
+          isArabic && "font-noto-arabic text-xl tracking-normal"
+        )}>
           {t('brand.name')}
         </span>
-        <span className="text-xs text-muted-foreground leading-none">
+        {/* <span className={cn(
+          "text-xs text-muted-foreground leading-none",
+          isArabic && "font-noto-arabic"
+        )}>
           {t('brand.slogan.emerge')}
-        </span>
+        </span> */}
       </div>
     </Link>
   )
@@ -58,6 +77,8 @@ export const LogoWithEyeIteration = () => {
 
 export const LogoWithCircleIteration = () => {
   const { t } = useTranslation();
+  const { language } = useLanguage();
+  const isArabic = language === 'ar';
   
   return (
     <Link 
@@ -75,10 +96,16 @@ export const LogoWithCircleIteration = () => {
         </div>
       </div>
       <div className="flex flex-col gap-0.5">
-        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-emerald-600 leading-none">
+        <span className={cn(
+          "text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-emerald-600 leading-none",
+          isArabic && "font-noto-arabic text-xl tracking-normal"
+        )}>
           {t('brand.name')}
         </span>
-        <span className="text-xs text-muted-foreground leading-none">
+        <span className={cn(
+          "text-xs text-muted-foreground leading-none",
+          isArabic && "font-noto-arabic"
+        )}>
           {t('brand.slogan.emerge')}
         </span>
       </div>
