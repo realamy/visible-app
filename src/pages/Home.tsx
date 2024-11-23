@@ -1,13 +1,10 @@
+import { useState } from 'react'
 import { 
-  Search, 
   ArrowRight, 
-  TrendingUp, 
   Star, 
-  Clock, 
   Globe, 
   Code, 
   Palette, 
-  Megaphone,
   Users,
   Lock,
   CheckCircle2,
@@ -15,106 +12,224 @@ import {
   Heart,
   Wrench,
   Zap,
-  Hammer,
-  Paintbrush,
-  Home as HomeIcon
+  Home as HomeIcon,
+  User,
+  Briefcase
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Card } from '@/components/ui/card'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { SearchSection } from '@/components/layout/SearchSection'
 import { Badge } from '@/components/ui/badge'
-import { cn } from '@/lib/utils'
+import { useTranslation } from 'react-i18next'
+import { useLanguage } from '@/contexts/language-context'
+import { SupportedLanguages } from '@/types/i18next'
 
-const popularCategories = [
-  // Digital Services
-  {
-    id: 1,
-    title: "Web Development",
-    description: "Custom websites and web applications",
-    icon: Code,
-    count: 245,
-    type: "digital"
-  },
-  {
-    id: 2,
-    title: "Graphic Design",
-    description: "Logos, branding, and visual identity",
-    icon: Palette,
-    count: 189,
-    type: "digital"
-  },
-  // Home Services
-  {
-    id: 3,
-    title: "Plumbing",
-    description: "Repairs, installations, and maintenance",
-    icon: Wrench,
-    count: 167,
-    type: "home"
-  },
-  {
-    id: 4,
-    title: "Electrical",
-    description: "Wiring, fixtures, and repairs",
-    icon: Zap,
-    count: 134,
-    type: "home"
-  }
-]
+// Define base translation type
+type CategoryTranslation = {
+  title: string;
+  description: string;
+}
 
-const features = [
-  {
-    title: "Local Talent",
-    description: "Connect with skilled Algerian professionals",
-    icon: Users
-  },
-  {
-    title: "Secure Payments",
-    description: "Safe and reliable payment processing",
-    icon: Lock
-  },
-  {
-    title: "Quality Work",
-    description: "Verified professionals and review system",
-    icon: CheckCircle2
-  }
-]
-
-const topProfessionals = [
-  {
-    id: 1,
-    name: "Sarah Ahmed",
-    title: "Full Stack Developer",
-    rating: 4.9,
-    reviews: 127,
-    image: "https://ui-avatars.com/api/?name=Sarah+Ahmed",
-    badges: ["Top Rated", "Quick Response"],
-    type: "digital"
-  },
-  {
-    id: 2,
-    name: "Ahmed Benali",
-    title: "Master Plumber",
-    rating: 4.8,
-    reviews: 98,
-    image: "https://ui-avatars.com/api/?name=Ahmed+Benali",
-    badges: ["Licensed Pro"],
-    type: "home"
-  },
-  {
-    id: 3,
-    name: "Amina Kadi",
-    title: "UI/UX Designer",
-    rating: 5.0,
-    reviews: 156,
-    image: "https://ui-avatars.com/api/?name=Amina+Kadi",
-    badges: ["Top Rated Plus"],
-    type: "digital"
-  }
-]
+// Define category with translations
+interface Category {
+  id: number;
+  translations: { [key in SupportedLanguages]: CategoryTranslation };
+  icon: React.ElementType;
+  count?: number;
+  type?: string;
+}
 
 function Home() {
+  const { t } = useTranslation()
+  const { currentLanguage, direction } = useLanguage()
+  const [activeTab, setActiveTab] = useState('client')
+
+  const popularCategories: Category[] = [
+    // Digital Services
+    {
+      id: 1,
+      translations: {
+        en: {
+          title: "Web Development",
+          description: "Custom websites and web applications"
+        },
+        fr: {
+          title: "Développement Web",
+          description: "Sites web et applications web personnalisés"
+        },
+        ar: {
+          title: "تطوير الويب",
+          description: "مواقع وتطبيقات ويب مخصصة"
+        }
+      } as { [key in SupportedLanguages]: CategoryTranslation },
+      icon: Code,
+      count: 245,
+      type: "digital"
+    },
+    {
+      id: 2,
+      translations: {
+        en: {
+          title: "Graphic Design",
+          description: "Logos, branding, and visual identity"
+        },
+        fr: {
+          title: "Design Graphique",
+          description: "Logos, image de marque et identité visuelle"
+        },
+        ar: {
+          title: "التصميم الجرافيكي",
+          description: "الشعارات والعلامات التجارية والهوية البصرية"
+        }
+      } as { [key in SupportedLanguages]: CategoryTranslation },
+      icon: Palette,
+      count: 189,
+      type: "digital"
+    },
+    // Home Services
+    {
+      id: 3,
+      translations: {
+        en: {
+          title: "Plumbing",
+          description: "Repairs, installations, and maintenance"
+        },
+        fr: {
+          title: "Plomberie",
+          description: "Réparations, installations et maintenance"
+        },
+        ar: {
+          title: "السباكة",
+          description: "إصلاحات وتركيبات وصيانة"
+        }
+      } as { [key in SupportedLanguages]: CategoryTranslation },
+      icon: Wrench,
+      count: 167,
+      type: "home"
+    },
+    {
+      id: 4,
+      translations: {
+        en: {
+          title: "Electrical",
+          description: "Wiring, fixtures, and repairs"
+        },
+        fr: {
+          title: "Électricité",
+          description: "Câblage, luminaires et réparations"
+        },
+        ar: {
+          title: "الكهرباء",
+          description: "الأسلاك والتركيبات والإصلاحات"
+        }
+      } as { [key in SupportedLanguages]: CategoryTranslation },
+      icon: Zap,
+      count: 134,
+      type: "home"
+    }
+  ]
+  const features = [
+    {
+      id: 1,
+      translations: {
+        en: {
+          title: "Local Talent",
+          description: "Connect with skilled Algerian professionals"
+        },
+        fr: {
+          title: "Talents Locaux",
+          description: "Connectez-vous avec des professionnels algériens qualifiés"
+        },
+        ar: {
+          title: "المواهب المحلية",
+          description: "تواصل مع المحترفين الجزائريين المهرة"
+        }
+      } as { [key in SupportedLanguages]: CategoryTranslation },
+      icon: Users
+    },
+    {
+      id: 2,
+      translations: {
+        en: {
+          title: "Secure Payments",
+          description: "Safe and reliable payment processing"
+        },
+        fr: {
+          title: "Paiements Sécurisés",
+          description: "Traitement des paiements sûr et fiable"
+        },
+        ar: {
+          title: "مدفوعات آمنة",
+          description: "معالجة آمنة وموثوقة للمدفوعات"
+        }
+      } as { [key in SupportedLanguages]: CategoryTranslation },
+      icon: Lock
+    },
+    {
+      id: 3,
+      translations: {
+        en: {
+          title: "Quality Work",
+          description: "Guaranteed satisfaction with every project"
+        },
+        fr: {
+          title: "Travail de Qualité",
+          description: "Satisfaction garantie pour chaque projet"
+        },
+        ar: {
+          title: "عمل عالي الجودة",
+          description: "رضا مضمون مع كل مشروع"
+        }
+      } as { [key in SupportedLanguages]: CategoryTranslation },
+      icon: CheckCircle2
+    }
+  ]
+  const topProfessionals = [
+    {
+      id: 1,
+      name: "Sarah Ahmed",
+      title: "Full Stack Developer",
+      rating: 4.9,
+      reviews: 127,
+      image: "https://ui-avatars.com/api/?name=Sarah+Ahmed",
+      badges: ["topRated", "quickResponse"],
+      type: "digital"
+    },
+    {
+      id: 2,
+      name: "Ahmed Benali",
+      title: "Master Plumber",
+      rating: 4.8,
+      reviews: 98,
+      image: "https://ui-avatars.com/api/?name=Ahmed+Benali",
+      badges: ["licensedPro"],
+      type: "home"
+    },
+    {
+      id: 3,
+      name: "Amina Kadi",
+      title: "UI/UX Designer",
+      rating: 5.0,
+      reviews: 156,
+      image: "https://ui-avatars.com/api/?name=Amina+Kadi",
+      badges: ["topRatedPlus"],
+      type: "digital"
+    }
+  ]
+
+  const translatedPopularCategories = popularCategories.map(category => ({
+    ...category,
+    title: category.translations[currentLanguage as SupportedLanguages].title,
+    description: category.translations[currentLanguage as SupportedLanguages].description
+  }))
+
+  const translatedFeatures = features.map(feature => ({
+    ...feature,
+    title: feature.translations[currentLanguage as SupportedLanguages].title,
+    description: feature.translations[currentLanguage as SupportedLanguages].description
+  }))
+
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -124,21 +239,26 @@ function Home() {
           <div className="py-12 sm:py-16 lg:py-20">
             <div className="text-center">
               <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-                Find Skilled{' '}
-                <span className="text-primary">Local Professionals</span>
+                {t('home.hero.title.start')}{' '}
+                <span className="text-primary">{t('home.hero.title.highlight')}</span>
                 <br />
-                for Any Project
+                {t('home.hero.title.end')}
               </h1>
               <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-                Connect with talented freelancers and local service providers for all your digital and home improvement needs
+                {t('home.hero.subtitle')}
               </p>
             </div>
             
             <div className="mt-10">
               <SearchSection />
               <div className="mt-4 flex flex-wrap justify-center gap-2 text-sm text-muted-foreground">
-                Popular:
-                {['Web Development', 'Graphic Design', 'Plumbing', 'Electrical'].map((tag) => (
+                {t('home.hero.popular')}:
+                {[
+                  t('home.hero.popularServices.webDev'),
+                  t('home.hero.popularServices.graphicDesign'),
+                  t('home.hero.popularServices.plumbing'),
+                  t('home.hero.popularServices.electrical')
+                ].map((tag) => (
                   <Badge
                     key={tag}
                     variant="outline"
@@ -157,9 +277,9 @@ function Home() {
       <section className="border-y bg-muted/50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           <div className="text-center space-y-4">
-            <h3 className="text-2xl font-bold tracking-tight">Trusted Across Algeria</h3>
+            <h3 className="text-2xl font-bold tracking-tight">{t('home.trust.title')}</h3>
             <p className="text-sm font-medium text-muted-foreground">
-              Connecting professionals and clients in all 48 wilayas
+              {t('home.trust.subtitle')}
             </p>
           </div>
           
@@ -168,73 +288,73 @@ function Home() {
               <div className="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10">
                 <Users className="h-6 w-6 text-primary" />
               </div>
-              <p className="text-2xl font-bold">15K+</p>
-              <p className="text-sm text-muted-foreground text-center">Active Professionals</p>
+              <p className="text-2xl font-bold">{t('home.trust.stats.professionals.value')}</p>
+              <p className="text-sm text-muted-foreground text-center">{t('home.trust.stats.professionals.label')}</p>
             </div>
             
             <div className="col-span-1 flex flex-col items-center gap-2">
               <div className="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10">
                 <CheckCircle2 className="h-6 w-6 text-primary" />
               </div>
-              <p className="text-2xl font-bold">25K+</p>
-              <p className="text-sm text-muted-foreground text-center">Completed Projects</p>
+              <p className="text-2xl font-bold">{t('home.trust.stats.projects.value')}</p>
+              <p className="text-sm text-muted-foreground text-center">{t('home.trust.stats.projects.label')}</p>
             </div>
             
             <div className="col-span-1 flex flex-col items-center gap-2">
               <div className="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10">
                 <Star className="h-6 w-6 text-primary" />
               </div>
-              <p className="text-2xl font-bold">4.8/5</p>
-              <p className="text-sm text-muted-foreground text-center">Average Rating</p>
+              <p className="text-2xl font-bold">{t('home.trust.stats.rating.value')}</p>
+              <p className="text-sm text-muted-foreground text-center">{t('home.trust.stats.rating.label')}</p>
             </div>
             
             <div className="col-span-1 flex flex-col items-center gap-2">
               <div className="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10">
                 <Globe className="h-6 w-6 text-primary" />
               </div>
-              <p className="text-2xl font-bold">48</p>
-              <p className="text-sm text-muted-foreground text-center">Wilayas Covered</p>
+              <p className="text-2xl font-bold">{t('home.trust.stats.coverage.value')}</p>
+              <p className="text-sm text-muted-foreground text-center">{t('home.trust.stats.coverage.label')}</p>
             </div>
           </div>
 
           <div className="mt-12">
             <div className="text-center space-y-4 mb-8">
-              <h4 className="text-xl font-semibold tracking-tight">Featured In Leading Media</h4>
+              <h4 className="text-xl font-semibold tracking-tight">{t('home.trust.media.title')}</h4>
               <p className="text-sm text-muted-foreground">
-                Our platform has been recognized by major Algerian and international media outlets
+                {t('home.trust.media.subtitle')}
               </p>
             </div>
             <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
               {[
                 {
-                  name: 'Echorouk',
-                  type: 'News',
-                  reach: '2M+ Readers'
+                  name: t('home.trust.media.partners.echorouk.name'),
+                  type: t('home.trust.media.partners.echorouk.type'),
+                  reach: t('home.trust.media.partners.echorouk.reach')
                 },
                 {
-                  name: 'El Watan',
-                  type: 'Press',
-                  reach: '1.5M+ Readers'
+                  name: t('home.trust.media.partners.elWatan.name'),
+                  type: t('home.trust.media.partners.elWatan.type'),
+                  reach: t('home.trust.media.partners.elWatan.reach')
                 },
                 {
-                  name: 'Liberté',
-                  type: 'Media',
-                  reach: '1M+ Readers'
+                  name: t('home.trust.media.partners.liberte.name'),
+                  type: t('home.trust.media.partners.liberte.type'),
+                  reach: t('home.trust.media.partners.liberte.reach')
                 },
                 {
-                  name: 'TSA',
-                  type: 'Digital News',
-                  reach: '3M+ Monthly Visits'
+                  name: t('home.trust.media.partners.tsa.name'),
+                  type: t('home.trust.media.partners.tsa.type'),
+                  reach: t('home.trust.media.partners.tsa.reach')
                 },
                 {
-                  name: 'El Khabar',
-                  type: 'News',
-                  reach: '1.8M+ Readers'
+                  name: t('home.trust.media.partners.elKhabar.name'),
+                  type: t('home.trust.media.partners.elKhabar.type'),
+                  reach: t('home.trust.media.partners.elKhabar.reach')
                 },
                 {
-                  name: 'DZ Entreprise',
-                  type: 'Business',
-                  reach: '500K+ Readers'
+                  name: t('home.trust.media.partners.dzEntreprise.name'),
+                  type: t('home.trust.media.partners.dzEntreprise.type'),
+                  reach: t('home.trust.media.partners.dzEntreprise.reach')
                 }
               ].map((partner) => (
                 <div
@@ -257,7 +377,7 @@ function Home() {
             </div>
             <div className="mt-8 text-center">
               <Button variant="link" className="text-sm text-muted-foreground hover:text-primary">
-                View all press coverage
+                {t('home.trust.media.viewAll')}
                 <ChevronRight className="ml-1 h-4 w-4" />
               </Button>
             </div>
@@ -269,51 +389,55 @@ function Home() {
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Popular Services</h2>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{t('home.categories.title')}</h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Browse our most requested digital and home services
+              {t('home.categories.subtitle')}
             </p>
           </div>
           
           <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6">
-            {popularCategories.map((category) => (
+            {translatedPopularCategories.map((category) => (
               <Card
                 key={category.id}
                 className="group relative overflow-hidden transition-all hover:shadow-lg"
               >
-                <div className="p-4 sm:p-6">
+                <CardHeader className="p-4 sm:p-6 space-y-0">
                   <div className="flex flex-wrap items-start justify-between gap-2">
                     <category.icon className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
                     {category.type === "digital" ? (
                       <Badge variant="secondary" className="flex items-center gap-1">
                         <Globe className="h-3 w-3" />
-                        <span className="hidden sm:inline">Digital Service</span>
+                        <span className="hidden sm:inline">{t('home.categories.types.digital')}</span>
                       </Badge>
                     ) : (
                       <Badge variant="secondary" className="flex items-center gap-1">
                         <HomeIcon className="h-3 w-3" />
-                        <span className="hidden sm:inline">Home Service</span>
+                        <span className="hidden sm:inline">{t('home.categories.types.home')}</span>
                       </Badge>
                     )}
                   </div>
-                  <h3 className="mt-4 text-base font-semibold sm:text-lg">{category.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                  <CardTitle className="mt-4 text-base font-semibold sm:text-lg">
+                    {category.title}
+                  </CardTitle>
+                  <CardDescription className="mt-2 line-clamp-2">
                     {category.description}
-                  </p>
-                  <div className="mt-4 flex items-center justify-between">
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="p-4 sm:p-6 pt-0">
+                  <div className="flex items-center justify-between">
                     <span className="text-xs sm:text-sm text-muted-foreground">
-                      {category.count}+ professionals
+                      {category.count}+ {t('home.categories.count')}
                     </span>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="group-hover:translate-x-1 transition-transform"
+                      className={`group-hover:translate-x-${direction === 'rtl' ? '-1' : '1'} transition-transform ${direction === 'rtl' ? 'flex-row-reverse' : ''}`}
                     >
-                      {category.type === "digital" ? "Hire Now" : "Book Now"} <ChevronRight className="ml-1 h-4 w-4" />
+                      {category.type === "digital" ? t('home.categories.cta.digital') : t('home.categories.cta.home')} 
+                      <ChevronRight className={`${direction === 'rtl' ? 'mr-1 rotate-180' : 'ml-1'} h-4 w-4`} />
                     </Button>
                   </div>
-                </div>
-                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </CardContent>
               </Card>
             ))}
           </div>
@@ -325,17 +449,17 @@ function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Why Choose Our Platform
+              {t('home.features.title')}
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              We connect you with verified professionals for all your project needs
+              {t('home.features.subtitle')}
             </p>
           </div>
-
+          
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature) => (
+            {translatedFeatures.map((feature) => (
               <Card
-                key={feature.title}
+                key={feature.id}
                 className="group relative overflow-hidden hover:shadow-lg transition-all"
               >
                 <div className="p-6">
@@ -354,118 +478,107 @@ function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 sm:py-20">
+      <section className="py-16 sm:py-20 bg-muted/50" dir={direction}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">How Visible Works</h2>
+          <div className="text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              {t('home.howItWorks.title')}
+            </h2>
             <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-              Whether you're looking to hire or ready to work, Visible makes it simple. Choose your path:
+              {t('home.howItWorks.subtitle')}
             </p>
-            
-            <div className="flex items-center justify-center gap-4 mt-6">
-              <Button variant="outline" className="min-w-[140px]">
-                <Users className="mr-2 h-4 w-4" />
-                I'm a Client
+
+            {/* Path Selection */}
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button 
+                variant="outline" 
+                size="lg"
+                className={`min-w-[200px] transition-colors ${activeTab === 'client' ? 'bg-primary text-primary-foreground hover:bg-primary/90' : ''}`}
+                onClick={() => setActiveTab('client')}
+              >
+                <User className={`${direction === 'rtl' ? 'ml-2' : 'mr-2'} h-5 w-5`} />
+                {t('home.howItWorks.client')}
               </Button>
-              <Button variant="outline" className="min-w-[140px]">
-                <Wrench className="mr-2 h-4 w-4" />
-                I'm a Professional
+              <Button 
+                variant="outline"
+                size="lg" 
+                className={`min-w-[200px] transition-colors ${activeTab === 'professional' ? 'bg-primary text-primary-foreground hover:bg-primary/90' : ''}`}
+                onClick={() => setActiveTab('professional')}
+              >
+                <Briefcase className={`${direction === 'rtl' ? 'ml-2' : 'mr-2'} h-5 w-5`} />
+                {t('home.howItWorks.professional')}
               </Button>
             </div>
           </div>
-          
-          <div className="mt-16 relative">
-            {/* Connecting Line */}
-            <div className="absolute top-1/2 left-4 right-4 h-0.5 bg-primary/10 -translate-y-1/2 hidden lg:block" />
-            
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                {
-                  step: 1,
-                  title: "Describe Your Needs",
-                  description: "Tell us what you're looking for - whether it's a website design or home repair",
-                  icon: Search,
-                  benefits: ["Smart matching algorithm", "Detailed project templates", "Instant cost estimates"],
-                  cta: "Browse Categories"
-                },
-                {
-                  step: 2,
-                  title: "Compare Professionals",
-                  description: "Review verified profiles, past work, and client feedback to find your perfect match",
-                  icon: CheckCircle2,
-                  benefits: ["Verified reviews", "Portfolio showcase", "Experience level indicators"],
-                  cta: "View Top Pros"
-                },
-                {
-                  step: 3,
-                  title: "Connect & Collaborate",
-                  description: "Discuss project details, timeline, and pricing with selected professionals",
-                  icon: Users,
-                  benefits: ["Secure messaging", "Video consultations", "Custom proposals"],
-                  cta: "Learn More"
-                },
-                {
-                  step: 4,
-                  title: "Complete Project",
-                  description: "Work gets done, payment is released only when you're 100% satisfied",
-                  icon: Lock,
-                  benefits: ["Secure payments", "Work guarantee", "Dispute resolution"],
-                  cta: "Get Started"
-                }
-              ].map((item) => (
-                <div key={item.step} className="relative group">
-                  <div className="flex flex-col h-full bg-card rounded-lg border p-6 hover:border-primary/50 transition-colors">
-                    {/* Step Number */}
-                    <div className="absolute -top-4 -left-4 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg">
-                      <span className="text-sm font-bold">{item.step}</span>
+
+          <div className="mt-16">
+            <div className="max-w-3xl mx-auto">
+              <div className="space-y-12">
+                {['describe', 'compare', 'connect', 'complete'].map((step, index) => (
+                  <div key={step} className="group relative">
+                    <div className="absolute -inset-x-4 -inset-y-4 z-0 scale-95 bg-background opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl" />
+                    <div className="relative z-10 p-6">
+                      {/* Step Number */}
+                      <div className={`absolute ${direction === 'rtl' ? '-right-4' : '-left-4'} -top-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg ring-4 ring-background`}>
+                        <span className="text-base font-bold">{index + 1}</span>
+                      </div>
+
+                      <div className={`${direction === 'rtl' ? 'mr-6' : 'ml-6'}`}>
+                        <h3 className="text-xl font-semibold">
+                          {t(`home.howItWorks.steps.${step}.title`)}
+                        </h3>
+                        <p className="mt-2 text-muted-foreground">
+                          {t(`home.howItWorks.steps.${step}.description`)}
+                        </p>
+                        <ul className="mt-4 space-y-3">
+                          {(t(`home.howItWorks.steps.${step}.benefits`, { returnObjects: true }) as string[]).map((benefit) => (
+                            <li key={benefit} className="flex items-start">
+                              <CheckCircle2 className={`${direction === 'rtl' ? 'ml-3' : 'mr-3'} h-5 w-5 text-primary flex-shrink-0 mt-0.5`} />
+                              <span className="text-sm text-muted-foreground">{benefit}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <Button 
+                          variant="ghost" 
+                          className="mt-6 w-full group-hover:bg-primary/5 font-medium"
+                        >
+                          <div className="flex w-full items-center justify-between">
+                            <ArrowRight 
+                              className="h-5 w-5 transition-transform group-hover:translate-x-1" 
+                            />
+                            <span>{t(`home.howItWorks.steps.${step}.cta`)}</span>
+                          </div>
+                        </Button>
+                      </div>
                     </div>
-                    
-                    {/* Icon */}
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                      <item.icon className="h-6 w-6 text-primary" />
-                    </div>
-                    
-                    {/* Content */}
-                    <h3 className="text-lg font-semibold">{item.title}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground flex-grow">
-                      {item.description}
-                    </p>
-                    
-                    {/* Benefits */}
-                    <ul className="mt-4 space-y-2">
-                      {item.benefits.map((benefit, index) => (
-                        <li key={index} className="flex items-center text-xs text-muted-foreground">
-                          <CheckCircle2 className="mr-2 h-3 w-3 text-primary" />
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    {/* CTA */}
-                    <Button variant="ghost" className="mt-4 w-full justify-between group-hover:bg-primary/5">
-                      {item.cta}
-                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Bottom CTA */}
-          <div className="mt-12 text-center">
-            <div className="inline-flex items-center rounded-full border bg-muted px-4 py-1.5 text-sm text-muted-foreground">
-              <Star className="mr-2 h-4 w-4 text-primary" />
-              Join over 40,000 satisfied clients across Algeria
+          <div className="mt-20 text-center">
+            <div className="inline-flex items-center rounded-full border bg-background px-4 py-1.5 text-sm text-muted-foreground">
+              <Star className={`${direction === 'rtl' ? 'ml-2' : 'mr-2'} h-5 w-5 text-primary`} />
+              {t('home.howItWorks.bottomCtaText')}
             </div>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="min-w-[200px]">
-                Post a Project
-                <ArrowRight className="ml-2 h-4 w-4" />
+              <Button size="lg" className="min-w-[200px] font-medium">
+                <div className="flex w-full items-center justify-between">
+                  <ArrowRight 
+                    className="h-5 w-5 transition-transform group-hover:translate-x-1"
+                  />
+                  <span>{t('home.howItWorks.bottomCta.postProject')}</span>
+                </div>
               </Button>
-              <Button size="lg" variant="outline" className="min-w-[200px]">
-                Become a Professional
-                <ArrowRight className="ml-2 h-4 w-4" />
+              <Button size="lg" variant="outline" className="min-w-[200px] font-medium">
+                <div className="flex w-full items-center justify-between">
+                  <ArrowRight 
+                    className="h-5 w-5 transition-transform group-hover:translate-x-1"
+                  />
+                  <span>{t('home.howItWorks.bottomCta.becomeProfessional')}</span>
+                </div>
               </Button>
             </div>
           </div>
@@ -476,36 +589,36 @@ function Home() {
       <section className="bg-muted/50 py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Success Stories</h2>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{t('home.successStories.title')}</h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Real projects, real results
+              {t('home.successStories.subtitle')}
             </p>
           </div>
 
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                client: "Tech Startup",
-                service: "Web Development",
-                professional: "Sarah Ahmed",
-                description: "Complete e-commerce platform built in 6 weeks",
-                result: "150% increase in online sales",
+                client: t('home.successStories.stories.techStartup.client'),
+                service: t('home.successStories.stories.techStartup.service'),
+                professional: t('home.successStories.stories.techStartup.professional'),
+                description: t('home.successStories.stories.techStartup.description'),
+                result: t('home.successStories.stories.techStartup.result'),
                 type: "digital"
               },
               {
-                client: "Villa Owner",
-                service: "Plumbing",
-                professional: "Ahmed Benali",
-                description: "Complete bathroom renovation",
-                result: "Completed 3 days ahead of schedule",
+                client: t('home.successStories.stories.villaOwner.client'),
+                service: t('home.successStories.stories.villaOwner.service'),
+                professional: t('home.successStories.stories.villaOwner.professional'),
+                description: t('home.successStories.stories.villaOwner.description'),
+                result: t('home.successStories.stories.villaOwner.result'),
                 type: "home"
               },
               {
-                client: "Local Restaurant",
-                service: "Graphic Design",
-                professional: "Amina Kadi",
-                description: "Brand identity refresh",
-                result: "30% increase in customer engagement",
+                client: t('home.successStories.stories.restaurant.client'),
+                service: t('home.successStories.stories.restaurant.service'),
+                professional: t('home.successStories.stories.restaurant.professional'),
+                description: t('home.successStories.stories.restaurant.description'),
+                result: t('home.successStories.stories.restaurant.result'),
                 type: "digital"
               }
             ].map((story, index) => (
@@ -513,7 +626,7 @@ function Home() {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <Badge variant={story.type === "digital" ? "default" : "secondary"}>
-                      {story.type === "digital" ? "Digital Service" : "Home Service"}
+                      {story.type === "digital" ? t('home.successStories.types.digital') : t('home.successStories.types.home')}
                     </Badge>
                     <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
                   </div>
@@ -538,10 +651,10 @@ function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Top Rated Professionals
+              {t('home.professionals.title')}
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Work with talented freelancers and skilled service providers
+              {t('home.professionals.subtitle')}
             </p>
           </div>
 
@@ -570,7 +683,7 @@ function Home() {
                       <Button
                         size="icon"
                         variant="ghost"
-                        className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className={`h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity ${direction === 'rtl' ? 'flex-row-reverse' : ''}`}
                       >
                         <Heart className="h-4 w-4" />
                       </Button>
@@ -580,21 +693,24 @@ function Home() {
                       <Star className="h-4 w-4 fill-primary text-primary" />
                       <span className="text-sm font-medium">{professional.rating}</span>
                       <span className="text-xs sm:text-sm text-muted-foreground">
-                        ({professional.reviews} reviews)
+                        ({professional.reviews} {t('home.professionals.reviews')})
                       </span>
                     </div>
 
                     <div className="flex flex-wrap gap-2">
                       {professional.badges.map((badge) => (
                         <Badge key={badge} variant="secondary" className="text-xs sm:text-sm">
-                          {badge}
+                          {t(`home.professionals.badges.${badge.toLowerCase().replace(' ', '')}`)}
                         </Badge>
                       ))}
                     </div>
 
                     <div className="pt-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Button className="w-full text-sm" variant="outline">
-                        {professional.type === "digital" ? "Hire Now" : "Book Now"}
+                      <Button 
+                        className={`w-full text-sm ${direction === 'rtl' ? 'flex-row-reverse' : ''}`} 
+                        variant="outline"
+                      >
+                        {professional.type === "digital" ? t('home.categories.cta.digital') : t('home.categories.cta.home')}
                       </Button>
                     </div>
                   </div>
@@ -604,9 +720,12 @@ function Home() {
           </div>
 
           <div className="mt-12 text-center">
-            <Button size="lg" className="gap-2">
-              Browse All Professionals
-              <ArrowRight className="h-4 w-4" />
+            <Button 
+              size="lg" 
+              className={`gap-2 ${direction === 'rtl' ? 'flex-row-reverse' : ''}`}
+            >
+              {t('home.professionals.browseAll')}
+              <ArrowRight className={`${direction === 'rtl' ? 'mr-2 rotate-180' : 'ml-2'} h-4 w-4`} />
             </Button>
           </div>
         </div>

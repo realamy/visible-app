@@ -70,6 +70,99 @@
     "messages": "Messages",
     "signIn": "Se Connecter",
     "signOut": "Se Déconnecter",
-    "getStarted": "Commencer"
+    "getStarted": "Commencer",
+    "menu": {
+      "account": "Compte",
+      "work": "Travail"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": {
+        "start": "Trouvez des",
+        "highlight": "Professionnels Locaux",
+        "end": "pour Chaque Projet"
+      },
+      "subtitle": "Connectez-vous avec des freelances talentueux et des prestataires de services locaux pour tous vos besoins numériques et d'amélioration de l'habitat",
+      "popular": "Populaire",
+      "search": {
+        "placeholder": "Quel service recherchez-vous ?"
+      }
+    },
+    "trust": {
+      "title": "Reconnu à Travers l'Algérie",
+      "subtitle": "Connecter les professionnels et les clients dans les 48 wilayas",
+      "stats": {
+        "professionals": {
+          "value": "15K+",
+          "label": "Professionnels Actifs"
+        },
+        "projects": {
+          "value": "25K+",
+          "label": "Projets Réalisés"
+        },
+        "rating": {
+          "value": "4.8/5",
+          "label": "Note Moyenne"
+        },
+        "coverage": {
+          "value": "48",
+          "label": "Wilayas Couvertes"
+        }
+      },
+      "media": {
+        "title": "Présent dans les Médias Leaders",
+        "subtitle": "Notre plateforme a été reconnue par les principaux médias algériens et internationaux",
+        "viewAll": "Voir toute la couverture presse"
+      }
+    },
+    "categories": {
+      "title": "Services Populaires",
+      "subtitle": "Parcourez nos services numériques et domestiques les plus demandés",
+      "types": {
+        "digital": "Service Numérique",
+        "home": "Service à Domicile"
+      },
+      "cta": {
+        "digital": "Engager",
+        "home": "Réserver"
+      },
+      "count": "professionnels"
+    },
+    "features": {
+      "title": "Pourquoi Choisir Notre Plateforme",
+      "subtitle": "Nous vous mettons en relation avec des professionnels vérifiés pour tous vos besoins"
+    },
+    "professionals": {
+      "title": "Professionnels les Mieux Notés",
+      "subtitle": "Travaillez avec les meilleurs talents en Algérie",
+      "rating": "Note",
+      "reviews": "Avis",
+      "badges": {
+        "topRated": "Très Bien Noté",
+        "quickResponse": "Réponse Rapide",
+        "licensedPro": "Pro Certifié",
+        "topRatedPlus": "Top Pro Plus"
+      }
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "description": "Gérer vos préférences et paramètres de compte",
+    "language": {
+      "title": "Langue",
+      "enDescription": "Utiliser l'anglais comme langue d'affichage",
+      "frDescription": "Utiliser le français comme langue d'affichage",
+      "arDescription": "Utiliser l'arabe comme langue d'affichage"
+    },
+    "theme": {
+      "title": "Thème",
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système",
+      "lightDescription": "Utiliser le mode clair pour l'interface",
+      "darkDescription": "Utiliser le mode sombre pour l'interface",
+      "systemDescription": "Correspondre automatiquement au thème système"
+    }
   }
 }

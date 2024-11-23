@@ -70,6 +70,254 @@
     "messages": "Messages",
     "signIn": "Sign In",
     "signOut": "Sign Out",
-    "getStarted": "Get Started"
+    "getStarted": "Get Started",
+    "menu": {
+      "account": "Account",
+      "work": "Work"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": {
+        "start": "Find Skilled",
+        "highlight": "Local Professionals",
+        "end": "for Any Project"
+      },
+      "subtitle": "Connect with talented freelancers and local service providers for all your digital and home improvement needs",
+      "popular": "Popular",
+      "search": {
+        "placeholder": "What service are you looking for?"
+      },
+      "popularServices": {
+        "webDev": "Web Development",
+        "graphicDesign": "Graphic Design",
+        "plumbing": "Plumbing",
+        "electrical": "Electrical"
+      }
+    },
+    "trust": {
+      "title": "Trusted Across Algeria",
+      "subtitle": "Connecting professionals and clients in all 48 wilayas",
+      "stats": {
+        "professionals": {
+          "value": "15K+",
+          "label": "Active Professionals"
+        },
+        "projects": {
+          "value": "25K+",
+          "label": "Completed Projects"
+        },
+        "rating": {
+          "value": "4.8/5",
+          "label": "Average Rating"
+        },
+        "coverage": {
+          "value": "48",
+          "label": "Wilayas Covered"
+        }
+      },
+      "media": {
+        "title": "Featured In Leading Media",
+        "subtitle": "Our platform has been recognized by major Algerian and international media outlets",
+        "viewAll": "View all press coverage",
+        "partners": {
+          "echorouk": {
+            "name": "Echorouk",
+            "type": "News",
+            "reach": "2M+ Readers"
+          },
+          "elWatan": {
+            "name": "El Watan",
+            "type": "Press",
+            "reach": "1.5M+ Readers"
+          },
+          "liberte": {
+            "name": "Liberté",
+            "type": "Media",
+            "reach": "1M+ Readers"
+          },
+          "tsa": {
+            "name": "TSA",
+            "type": "Digital News",
+            "reach": "3M+ Monthly Visits"
+          },
+          "elKhabar": {
+            "name": "El Khabar",
+            "type": "News",
+            "reach": "1.8M+ Readers"
+          },
+          "dzEntreprise": {
+            "name": "DZ Entreprise",
+            "type": "Business",
+            "reach": "500K+ Readers"
+          }
+        }
+      }
+    },
+    "categories": {
+      "title": "Popular Services",
+      "subtitle": "Browse our most requested digital and home services",
+      "types": {
+        "digital": "Digital Service",
+        "home": "Home Service"
+      },
+      "items": {
+        "webDev": {
+          "title": "Web Development",
+          "description": "Custom websites and web applications"
+        },
+        "graphicDesign": {
+          "title": "Graphic Design",
+          "description": "Logos, branding, and visual identity"
+        },
+        "plumbing": {
+          "title": "Plumbing",
+          "description": "Repairs, installations, and maintenance"
+        },
+        "electrical": {
+          "title": "Electrical",
+          "description": "Wiring, fixtures, and repairs"
+        }
+      },
+      "cta": {
+        "digital": "Hire Now",
+        "home": "Book Now"
+      },
+      "count": "professionals"
+    },
+    "features": {
+      "title": "Why Choose Our Platform",
+      "subtitle": "We connect you with verified professionals for all your project needs",
+      "items": {
+        "localTalent": {
+          "title": "Local Talent",
+          "description": "Connect with skilled Algerian professionals"
+        },
+        "securePayments": {
+          "title": "Secure Payments",
+          "description": "Safe and reliable payment processing"
+        },
+        "qualityWork": {
+          "title": "Quality Work",
+          "description": "Verified professionals and review system"
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "How Visible Works",
+      "subtitle": "Whether you're looking to hire or ready to work, Visible makes it simple. Choose your path:",
+      "client": "I'm a Client",
+      "professional": "I'm a Professional",
+      "steps": {
+        "describe": {
+          "title": "Describe Your Needs",
+          "description": "Tell us what you need, whether it's a specific service or a custom project",
+          "benefits": [
+            "Detailed project specifications",
+            "Budget flexibility",
+            "Timeline planning"
+          ],
+          "cta": "Post a Project"
+        },
+        "compare": {
+          "title": "Compare Options",
+          "description": "Review proposals from professionals and compare their profiles",
+          "benefits": [
+            "Verified professionals",
+            "Detailed portfolios",
+            "Client reviews"
+          ],
+          "cta": "Browse Profiles"
+        },
+        "connect": {
+          "title": "Connect & Discuss",
+          "description": "Chat with professionals to refine your project details",
+          "benefits": [
+            "Secure messaging",
+            "File sharing",
+            "Video calls"
+          ],
+          "cta": "Start Chat"
+        },
+        "complete": {
+          "title": "Complete Project",
+          "description": "Work with your chosen professional and get the job done",
+          "benefits": [
+            "Milestone tracking",
+            "Secure payments",
+            "Quality guarantee"
+          ],
+          "cta": "Get Started"
+        }
+      },
+      "bottomCtaText": "Join thousands of satisfied clients",
+      "bottomCta": {
+        "postProject": "Post a Project",
+        "becomeProfessional": "Become a Professional"
+      }
+    },
+    "successStories": {
+      "title": "Success Stories",
+      "subtitle": "Real projects, real results",
+      "types": {
+        "digital": "Digital Service",
+        "home": "Home Service"
+      },
+      "stories": {
+        "techStartup": {
+          "client": "Tech Startup",
+          "service": "Web Development",
+          "professional": "Sarah Ahmed",
+          "description": "Complete e-commerce platform built in 6 weeks",
+          "result": "150% increase in online sales"
+        },
+        "villaOwner": {
+          "client": "Villa Owner",
+          "service": "Plumbing",
+          "professional": "Ahmed Benali",
+          "description": "Complete bathroom renovation",
+          "result": "Completed 3 days ahead of schedule"
+        },
+        "restaurant": {
+          "client": "Local Restaurant",
+          "service": "Graphic Design",
+          "professional": "Amina Kadi",
+          "description": "Brand identity refresh",
+          "result": "30% increase in customer engagement"
+        }
+      }
+    },
+    "professionals": {
+      "title": "Top Rated Professionals",
+      "subtitle": "Work with the best talent in Algeria",
+      "rating": "Rating",
+      "reviews": "reviews",
+      "badges": {
+        "toprated": "Top Rated",
+        "quickresponse": "Quick Response",
+        "licensedpro": "Licensed Pro",
+        "topratedplus": "Top Rated Plus"
+      },
+      "browseAll": "Browse All Professionals"
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Manage your account preferences and settings",
+      "language": {
+        "title": "Language",
+        "enDescription": "Use English as your display language",
+        "frDescription": "Use French as your display language",
+        "arDescription": "Use Arabic as your display language"
+      },
+      "theme": {
+        "title": "Theme",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System",
+        "lightDescription": "Use light mode for the interface",
+        "darkDescription": "Use dark mode for the interface",
+        "systemDescription": "Automatically match your system theme"
+      }
+    }
   }
 }

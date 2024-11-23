@@ -32,17 +32,22 @@ const UserDropdownContent = () => {
   
   return (
     <DropdownMenuContent align="end" className="w-56">
-      <div className="flex items-center justify-start gap-2 p-2">
-        <Avatar className="h-8 w-8">
-          <AvatarImage src={user?.avatar} alt={user?.name} />
-          <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col space-y-1">
-          <p className="text-sm font-medium leading-none">{user?.name}</p>
-          <p className="text-xs leading-none text-muted-foreground">{user?.email}</p>
+      <DropdownMenuLabel className="p-0">
+        <div className="flex items-center justify-start gap-2 p-2">
+          <Avatar className="h-8 w-8">
+            <AvatarImage src={user?.avatar} alt={user?.name} />
+            <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col space-y-1">
+            <p className="text-sm font-medium leading-none">{user?.name}</p>
+            <p className="text-xs leading-none text-muted-foreground">{user?.email}</p>
+          </div>
         </div>
-      </div>
+      </DropdownMenuLabel>
       <DropdownMenuSeparator />
+      <DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
+        {t('nav.menu.account')}
+      </DropdownMenuLabel>
       <DropdownMenuItem asChild>
         <Link to="/profile" className="flex w-full items-center">
           <User className="mr-2 h-4 w-4" />
@@ -55,6 +60,10 @@ const UserDropdownContent = () => {
           {t('nav.settings')}
         </Link>
       </DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
+        {t('nav.menu.work')}
+      </DropdownMenuLabel>
       <DropdownMenuItem asChild>
         <Link to="/projects" className="flex w-full items-center">
           <Briefcase className="mr-2 h-4 w-4" />
