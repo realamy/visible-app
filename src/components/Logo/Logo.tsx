@@ -19,8 +19,8 @@ export function LogoWithSpotlightIteration() {
       </div>
       <div className="flex flex-col gap-0.5">
         <span className={cn(
-          "text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-green-600 leading-none",
-          isArabic && "font-noto-arabic text-2xl tracking-normal"
+          "text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-green-600 leading-none",
+          isArabic ? "font-alshohadaa text-2xl tracking-normal" : "font-sans text-xl tracking-tight"
         )}>
           {t('brand.name')}
         </span>
@@ -60,7 +60,7 @@ export const LogoWithEyeIteration = () => {
       <div className="flex flex-col gap-0.5">
         <span className={cn(
           "text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-emerald-600 leading-none",
-          isArabic && "font-noto-arabic text-xl tracking-normal"
+          isArabic ? "font-alshohadaa text-2xl tracking-normal" : "font-sans text-xl tracking-tight"
         )}>
           {t('brand.name')}
         </span>
@@ -75,7 +75,7 @@ export const LogoWithEyeIteration = () => {
   )
 }
 
-export const LogoWithCircleIteration = () => {
+export const LogoWithCircleIteration = ({ textSize }: { textSize?: string }) => {
   const { t } = useTranslation();
   const { language } = useLanguage();
   const isArabic = language === 'ar';
@@ -98,8 +98,9 @@ export const LogoWithCircleIteration = () => {
       <div className="flex flex-col gap-0.5">
         <span className={cn(
           "text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-emerald-600 leading-none",
-          isArabic && "font-noto-arabic text-xl tracking-normal"
-        )}>
+          isArabic ? "font-alshohadaa text-2xl tracking-normal" : "font-sans text-xl tracking-tight"
+        )
+        }>
           {t('brand.name')}
         </span>
         <span className={cn(

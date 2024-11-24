@@ -13,9 +13,10 @@ export default {
   	},
   	extend: {
   		fontFamily: {
-  			sans: ['Inter var', 'Inter', 'system-ui', 'sans-serif'],
+  			sans: ['Inter', 'Noto Sans Arabic', 'system-ui', 'sans-serif'],
   			arabic: ['Noto Sans Arabic', 'system-ui', 'sans-serif'],
   			'noto-arabic': ['Noto Sans Arabic', 'sans-serif'],
+  			'alshohadaa': ['alshohadaa', 'cursive'],
   		},
   		colors: {
   			border: 'hsl(var(--border))',

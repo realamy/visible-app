@@ -261,5 +261,86 @@
       "darkDescription": "Utiliser le mode sombre pour l'interface",
       "systemDescription": "Correspondre automatiquement au thème système"
     }
+  },
+  "auth": {
+    "chooseAccountType": "Choisir le type de compte",
+    "accountTypeDescription": "Comment souhaitez-vous utiliser Visible ?",
+    "clientTitle": "Je recrute",
+    "clientDescription": "Je souhaite recruter des professionnels pour mes projets",
+    "freelancerTitle": "Je cherche du travail",
+    "freelancerDescription": "Je souhaite trouver des projets intéressants",
+    "createAccount": "Créer un compte",
+    "createFreelancerAccount": "Créez votre compte freelance et commencez à trouver du travail",
+    "createClientAccount": "Créez votre compte client et commencez à recruter des talents",
+    "welcomeBack": "Bienvenue",
+    "signInDescription": "Entrez vos identifiants pour accéder à votre compte",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "signIn": "Se connecter",
+    "signUp": "S'inscrire",
+    "name": "Nom complet",
+    "namePlaceholder": "Entrez votre nom complet",
+    "email": "Email",
+    "emailPlaceholder": "nom@exemple.com",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Entrez votre mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "profession": "Profession",
+    "selectProfession": "Sélectionnez votre profession",
+    "experience": "Années d'expérience",
+    "selectExperience": "Sélectionnez votre expérience",
+    "skills": "Compétences",
+    "skillsPlaceholder": "ex: JavaScript, React, UI Design",
+    "bio": "Bio",
+    "bioPlaceholder": "Parlez-nous de vous et de votre expérience",
+    "location": "Localisation",
+    "locationPlaceholder": "ex: Paris, France",
+    "hourlyRate": "Taux horaire (€)",
+    "hourlyRatePlaceholder": "Entrez votre taux horaire",
+    "companyName": "Nom de l'entreprise",
+    "companyNamePlaceholder": "Entrez le nom de votre entreprise",
+    "industry": "Secteur d'activité",
+    "selectIndustry": "Sélectionnez votre secteur d'activité",
+    "companySize": "Taille de l'entreprise",
+    "selectCompanySize": "Sélectionnez la taille de l'entreprise",
+    "continueWithGoogle": "Continuer avec Google",
+    "continueWithFacebook": "Continuer avec Facebook",
+    "orContinueWith": "ou continuer avec",
+    "termsNotice": "En cliquant sur continuer, vous acceptez nos",
+    "terms": "Conditions d'utilisation",
+    "privacyPolicy": "Politique de confidentialité",
+    "and": "et",
+    "rememberMe": "Se souvenir de moi",
+    "errors": {
+      "required": "Ce champ est obligatoire",
+      "invalidEmail": "Veuillez entrer une adresse email valide",
+      "passwordMismatch": "Les mots de passe ne correspondent pas",
+      "minLength": "Doit contenir au moins {{count}} caractères",
+      "maxLength": "Doit contenir au maximum {{count}} caractères"
+    }
+  },
+  "landing": {
+    "headline": "Connectez-vous avec les Meilleurs Talents",
+    "subheadline": "Rejoignez notre place de marché mondiale de professionnels et d'entreprises qualifiés. Trouvez du travail ou recrutez des experts dans différents domaines.",
+    "features": {
+      "verifiedProfessionals": {
+        "title": "Professionnels Vérifiés",
+        "description": "Tous les professionnels sont soigneusement évalués et vérifiés pour garantir la qualité."
+      },
+      "securePayments": {
+        "title": "Paiements Sécurisés",
+        "description": "Traitement des paiements sûr et sécurisé avec protection par séquestre."
+      },
+      "fairPricing": {
+        "title": "Prix Équitables",
+        "description": "Tarifs compétitifs sans frais cachés ni surcharges."
+      }
+    }
+  },
+  "common": {
+    "next": "Suivant",
+    "back": "Retour"
   }
 }

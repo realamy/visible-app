@@ -1,9 +1,17 @@
 import { createContext, useContext, ReactNode, useState } from 'react';
 
+interface RegisterParams {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  name: string;
+}
+
 interface AuthContextType {
   isAuthenticated: boolean;
   user: User | null;
-  login: () => void;
+  login: (email: string, password: string) => Promise<void>;
+  register: (params: RegisterParams) => Promise<void>;
   logout: () => void;
 }
 
@@ -20,13 +28,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
 
-  const login = () => {
+  const login = async (email: string, password: string) => {
     // Mock login
     setIsAuthenticated(true);
     setUser({
       id: '1',
       name: 'John Doe',
-      email: 'john@example.com',
+      email: email,
+    });
+  };
+
+  const register = async ({ email, password, confirmPassword, name }: RegisterParams) => {
+    // Mock registration
+    setIsAuthenticated(true);
+    setUser({
+      id: '1',
+      name,
+      email,
     });
   };
 
@@ -36,7 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

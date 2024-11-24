@@ -76,10 +76,20 @@
   },
   "brand": {
     "name": "Visible",
+    "tagline": "Connect with Top Talent",
     "slogan": {
       "illuminate": "Illuminate Talent",
       "emerge": "Emerge & Excel"
-    }
+    },
+    "description": "Join our global marketplace of skilled professionals and businesses. Find work or hire experts in various fields.",
+    "feature1Title": "Verified Professionals",
+    "feature1Description": "All professionals are thoroughly vetted and verified for quality assurance.",
+    "feature2Title": "Secure Payments",
+    "feature2Description": "Safe and secure payment processing with escrow protection.",
+    "feature3Title": "Fair Pricing",
+    "feature3Description": "Competitive rates with no hidden fees or charges.",
+    "activeUsers": "Active Users",
+    "joinCommunity": "Join our growing community today"
   },
   "nav": {
     "guest": "Guest User",
@@ -462,5 +472,68 @@
         "show": "Show Results"
       }
     }
+  },
+  "auth": {
+    "chooseAccountType": "Choose Account Type",
+    "accountTypeDescription": "Select how you want to use Visible",
+    "clientTitle": "I'm hiring for a project",
+    "clientDescription": "I need to hire talented professionals for my projects",
+    "freelancerTitle": "I'm looking for work",
+    "freelancerDescription": "I want to find great projects and clients",
+    "createAccount": "Create an account",
+    "createFreelancerAccount": "Create your freelancer account and start finding work",
+    "createClientAccount": "Create your client account and start hiring talent",
+    "welcomeBack": "Welcome back",
+    "signInDescription": "Enter your credentials to access your account",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "name": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "email": "Email",
+    "emailPlaceholder": "name@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "forgotPassword": "Forgot Password?",
+    "profession": "Profession",
+    "selectProfession": "Select your profession",
+    "experience": "Years of Experience",
+    "selectExperience": "Select your experience",
+    "skills": "Skills",
+    "skillsPlaceholder": "e.g., JavaScript, React, UI Design",
+    "bio": "Bio",
+    "bioPlaceholder": "Tell us about yourself and your experience",
+    "location": "Location",
+    "locationPlaceholder": "e.g., San Francisco, CA",
+    "hourlyRate": "Hourly Rate ($)",
+    "hourlyRatePlaceholder": "Enter your hourly rate",
+    "companyName": "Company Name",
+    "companyNamePlaceholder": "Enter your company name",
+    "industry": "Industry",
+    "selectIndustry": "Select your industry",
+    "companySize": "Company Size",
+    "selectCompanySize": "Select company size",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithFacebook": "Continue with Facebook",
+    "orContinueWith": "or continue with",
+    "termsNotice": "By clicking continue, you agree to our",
+    "terms": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "and": "and",
+    "rememberMe": "Remember me",
+    "errors": {
+      "required": "This field is required",
+      "invalidEmail": "Please enter a valid email address",
+      "passwordMismatch": "Passwords do not match",
+      "minLength": "Must be at least {{count}} characters",
+      "maxLength": "Must be at most {{count}} characters"
+    }
+  },
+  "common": {
+    "next": "Next",
+    "back": "Back"
   }
 }
