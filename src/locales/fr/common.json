@@ -1,4 +1,5 @@
 {
+  "professionals": "Professionnels",
   "menu": {
     "title": "Menu",
     "navigation": {
@@ -70,14 +71,41 @@
     }
   },
   "nav": {
+    "guest": "Invité",
+    "signInToAccess": "Connectez-vous pour accéder à votre compte",
+    "dashboard": "Tableau de bord",
+    "messages": "Messages",
+    "settings": "Paramètres",
+    "signIn": "Se Connecter",
+    "signUp": "S'inscrire",
+    "helpAndSupport": "Aide & Support",
+    "feedback": "Donner un avis",
+    "signOut": "Se Déconnecter",
+    "search": "Rechercher",
+    "userMenu": "Menu utilisateur",
+    "searchDialog": {
+      "title": "Rechercher",
+      "description": "Trouvez des services, des freelances et des projets",
+      "placeholder": "Tapez pour rechercher...",
+      "categories": {
+        "services": "Services",
+        "freelancers": "Freelances",
+        "projects": "Projets"
+      },
+      "trending": "Recherches populaires",
+      "recent": "Recherches récentes",
+      "noResults": "Aucun résultat trouvé"
+    },
+    "searchPlaceholder": "Rechercher services, freelances...",
+    "searchShortcut": "Appuyez sur ⌘K pour rechercher",
+    "myProjects": "Mes Projets",
+    "profile": "Profil",
+    "discover": "Découvrir",
     "services": "Services",
     "freelancers": "Freelances",
-    "profile": "Profil",
-    "settings": "Paramètres",
-    "projects": "Mes Projets",
-    "messages": "Messages",
-    "signIn": "Se Connecter",
-    "signOut": "Se Déconnecter",
+    "projects": "Projets",
+    "community": "Communauté",
+    "about": "À propos",
     "getStarted": "Commencer",
     "menu": {
       "account": "Compte",

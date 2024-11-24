@@ -54,8 +54,9 @@ const UserDropdownContent = () => {
   return (
     <DropdownMenuContent 
       align="end" 
+      side="bottom"
       sideOffset={8}
-      className="w-[320px] p-0 space-y-1"
+      className="w-[320px] p-0 space-y-1 data-[side=bottom]:translate-x-0"
     >
       {/* User Profile Section */}
       <div className="p-3">
@@ -188,10 +189,7 @@ const SearchDialog = () => {
           <Search className="h-4 w-4 text-muted-foreground" />
           <Input
             id="search"
-            placeholder={t('nav.searchDialog.placeholder')}
-            className="h-10"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            placeholder={t('nav.searchDialog.placeholder')} 
           />
           <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
             <span className="text-xs">⌘</span>K
@@ -238,15 +236,14 @@ const Navbar = () => {
       "sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
       isMobileMenuOpen ? "hidden md:block" : "block"
     )}>
-      <div className="container flex h-16 items-center justify-between">
-        {/* Logo - Visible on all screens */}
-        <div className="flex items-center">
+      <div className="container flex h-16 items-center overflow-visible">
+        {/* Logo and Mobile Nav */}
+        <div className="flex items-center flex-1 md:flex-initial">
           <LogoWithEyeIteration />
         </div>
 
-        {/* Navigation Links - Hidden on mobile */}
-        <nav className="hidden md:flex items-center justify-center flex-1 px-4">
-          {/* Main Navigation */}
+        {/* Desktop Navigation - Hidden on mobile */}
+        <nav className="hidden md:flex mx-6 flex-1">
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -287,7 +284,7 @@ const Navbar = () => {
                       "active:scale-[0.98] active:transition-none"
                     )}
                   >
-                    {t('nav.freelancers')}
+                    {t('professionals')}
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -345,44 +342,43 @@ const Navbar = () => {
         </nav>
 
         {/* Desktop Actions */}
-        <div className="hidden md:flex items-center space-x-4">
+        <div className="hidden md:flex items-center gap-4">
           {/* Search Bar */}
           {/* Auth Buttons */}
           {isAuthenticated ? (
             <>
-                      <Dialog>
-            <DialogTrigger asChild>
-              <Button 
-                variant="outline" 
-                className="md:w-[180px] lg:w-[250px] justify-start text-muted-foreground hover:bg-muted transition-colors"
-              >
-                <Search className="h-4 w-4 mr-2" />
-                <span className="hidden lg:inline-block">{t('nav.searchPlaceholder')}</span>
-                <span className="lg:hidden">{t('nav.search')}</span>
-              </Button>
-            </DialogTrigger>
-            <SearchDialog />
-          </Dialog>
-          <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="relative h-10 w-10 rounded-full ring-offset-background transition-colors hover:bg-muted"
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    className="w-[180px] xl:w-[250px] justify-start text-muted-foreground hover:bg-muted transition-colors"
+                  >
+                    <Search className="h-4 w-4 mr-2" />
+                    <span className="hidden xl:inline-block">{t('nav.searchPlaceholder')}</span>
+                    <span className="xl:hidden">{t('nav.search')}</span>
+                  </Button>
+                </DialogTrigger>
+                <SearchDialog />
+              </Dialog>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="relative h-10 w-10 rounded-full ring-offset-background transition-colors hover:bg-muted"
 
-                >
-                    <Avatar className="h-9 w-9">
-                      <AvatarImage src={user?.avatar} alt={user?.name} />
-                      <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                  <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-primary" />
-                  <span className="sr-only">{t('nav.userMenu')}</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <UserDropdownContent />
-            </DropdownMenu>
+                  >
+                      <Avatar className="h-9 w-9">
+                        <AvatarImage src={user?.avatar} alt={user?.name} />
+                        <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+                      </Avatar>
+                    <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-primary" />
+                    <span className="sr-only">{t('nav.userMenu')}</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <UserDropdownContent />
+              </DropdownMenu>
             </>
-  
           ) : (
             <>
               <Button 
@@ -404,7 +400,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Actions */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex md:hidden items-center gap-2 ml-auto relative">
           <Dialog>
             <DialogTrigger asChild>
               <Button 

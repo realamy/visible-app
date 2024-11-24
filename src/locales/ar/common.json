@@ -1,4 +1,5 @@
 {
+  "professionals": "المحترفون",
   "menu": {
     "title": "القائمة",
     "navigation": {
@@ -62,26 +63,53 @@
       }
     }
   },
+  "nav": {
+    "guest": "زائر",
+    "signInToAccess": "سجل الدخول للوصول إلى حسابك",
+    "dashboard": "لوحة التحكم",
+    "messages": "الرسائل",
+    "settings": "الإعدادات",
+    "signIn": "تسجيل الدخول",
+    "signUp": "إنشاء حساب",
+    "helpAndSupport": "المساعدة والدعم",
+    "feedback": "إرسال ملاحظات",
+    "signOut": "تسجيل الخروج",
+    "search": "بحث",
+    "userMenu": "قائمة المستخدم",
+    "searchDialog": {
+      "title": "بحث",
+      "description": "ابحث عن الخدمات والمستقلين والمشاريع",
+      "placeholder": "اكتب للبحث...",
+      "categories": {
+        "services": "الخدمات",
+        "freelancers": "المستقلون",
+        "projects": "المشاريع"
+      },
+      "trending": "عمليات البحث الشائعة",
+      "recent": "عمليات البحث الأخيرة",
+      "noResults": "لم يتم العثور على نتائج"
+    },
+    "searchPlaceholder": "ابحث عن خدمات، مستقلين...",
+    "searchShortcut": "اضغط ⌘K للبحث",
+    "myProjects": "مشاريعي",
+    "profile": "الملف الشخصي",
+    "discover": "اكتشف",
+    "services": "الخدمات",
+    "freelancers": "المستقلون",
+    "projects": "المشاريع",
+    "community": "المجتمع",
+    "about": "حول",
+    "getStarted": "ابدأ الآن",
+    "menu": {
+      "account": "الحساب",
+      "work": "العمل"
+    }
+  },
   "brand": {
     "name": "فيزيبل",
     "slogan": {
       "illuminate": "إضاءة المواهب",
       "emerge": "التألق والتميز"
-    }
-  },
-  "nav": {
-    "services": "الخدمات",
-    "freelancers": "المستقلون",
-    "profile": "الملف الشخصي",
-    "settings": "الإعدادات",
-    "projects": "مشاريعي",
-    "messages": "الرسائل",
-    "signIn": "تسجيل الدخول",
-    "signOut": "تسجيل الخروج",
-    "getStarted": "ابدأ الآن",
-    "menu": {
-      "account": "الحساب",
-      "work": "العمل"
     }
   },
   "home": {
