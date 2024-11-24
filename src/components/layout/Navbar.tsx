@@ -45,10 +45,11 @@ import { Input } from "@/components/ui/input"
 import { useState } from "react"
 import { LayoutDashboard, MessageSquare, HelpCircle, MessageCircle } from 'lucide-react'
 import { Separator } from "@/components/ui/separator"
+import { Sparkles } from 'lucide-react'
 
 const UserDropdownContent = () => {
   const { t } = useTranslation();
-  const { user, signOut } = useAuth();
+  const { user, logout } = useAuth();
 
   return (
     <DropdownMenuContent 
@@ -159,7 +160,7 @@ const UserDropdownContent = () => {
         {user && (
           <DropdownMenuItem 
             className="flex items-center gap-3 px-3 py-2.5 cursor-pointer text-red-600 dark:text-red-400 hover:!text-red-700 dark:hover:!text-red-300"
-            onClick={signOut}
+            onClick={logout}
           >
             <LogOut className="h-[18px] w-[18px]" />
             <span className="text-[15px]">{t('nav.signOut')}</span>
@@ -391,21 +392,19 @@ const Navbar = () => {
               >
                 {t('nav.signIn')}
               </Button>
-              <Button 
-                className="shadow-sm hover:shadow transition-all whitespace-nowrap"
-                asChild
+              <Link 
+                to="/signup" 
+                className="hidden md:inline-flex h-10 px-6 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full items-center gap-2 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-sm"
               >
-                <Link to="/signup">
-                  {t('nav.getStarted')}
-                </Link>
-              </Button>
+                <Sparkles className="h-4 w-4" />
+                <span className="font-medium">{t('nav.getStarted')}</span>
+              </Link>
             </>
           )}
         </div>
 
         {/* Mobile Actions */}
-        <div className="flex items-center gap-3 md:hidden">
-          {/* Search Button */}
+        <div className="flex md:hidden items-center gap-2">
           <Dialog>
             <DialogTrigger asChild>
               <Button 
@@ -417,25 +416,34 @@ const Navbar = () => {
                 <span className="sr-only">{t('nav.search')}</span>
               </Button>
             </DialogTrigger>
-            <SearchDialog />
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>{t('nav.search')}</DialogTitle>
+                <DialogDescription>
+                  {t('nav.searchDescription')}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="flex w-full max-w-sm items-center space-x-2">
+                <Input 
+                  type="text"
+                  placeholder={t('nav.searchPlaceholder')} 
+                />
+              </div>
+            </DialogContent>
           </Dialog>
 
-          {/* User Menu */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="h-10 w-10 rounded-full ring-offset-background transition-colors hover:bg-muted cursor-pointer"
-
+                className="h-10 w-10 rounded-full ring-offset-background transition-all transform hover:scale-[1.02] active:scale-[0.98] hover:bg-muted"
               >
                 {isAuthenticated ? (
-                  <Link to="/profile">
                   <Avatar className="h-9 w-9">
                     <AvatarImage src={user?.avatar} alt={user?.name} />
                     <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
                   </Avatar>
-                  </Link>
                 ) : (
                   <User className="h-6 w-6" />
                 )}
@@ -444,6 +452,18 @@ const Navbar = () => {
             </DropdownMenuTrigger>
             <UserDropdownContent />
           </DropdownMenu>
+
+          {!isAuthenticated && (
+            <Button 
+              asChild
+              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-sm"
+            >
+              <Link to="/signup" className="flex items-center gap-2">
+                <Sparkles className="h-4 w-4" />
+                <span className="font-medium">{t('nav.getStarted')}</span>
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
     </header>
