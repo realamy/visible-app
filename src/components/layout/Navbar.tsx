@@ -351,11 +351,12 @@ const Navbar = () => {
                 <DialogTrigger asChild>
                   <Button 
                     variant="outline" 
-                    className="w-[180px] xl:w-[250px] justify-start text-muted-foreground hover:bg-muted transition-colors"
+                    className="w-[180px] xl:w-[250px] justify-start text-muted-foreground hover:bg-muted transition-colors truncate"
                   >
-                    <Search className="h-4 w-4 mr-2" />
-                    <span className="hidden xl:inline-block">{t('nav.searchPlaceholder')}</span>
+                    <Search className="h-4 w-4 min-w-[16px] mr-2" />
+                    <span className="hidden xl:inline-block truncate">{t('nav.searchPlaceholder')}</span>
                     <span className="xl:hidden">{t('nav.search')}</span>
+                    <span className="hidden xl:inline-flex ml-auto text-xs text-muted-foreground/50">⌘K</span>
                   </Button>
                 </DialogTrigger>
                 <SearchDialog />
