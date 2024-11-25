@@ -255,10 +255,10 @@ function Home() {
               <div className="mt-4 flex flex-wrap justify-center gap-2 text-sm text-muted-foreground">
                 {t('home.hero.popular')}:
                 {[
-                  t('home.hero.popularServices.webDev'),
-                  t('home.hero.popularServices.graphicDesign'),
-                  t('home.hero.popularServices.plumbing'),
-                  t('home.hero.popularServices.electrical')
+                  t('home.hero.popularservices.webdev'),
+                  t('home.hero.popularservices.graphicdesign'),
+                  t('home.hero.popularservices.plumbing'),
+                  t('home.hero.popularservices.electrical')
                 ].map((tag) => (
                   <Badge
                     key={tag}
@@ -333,9 +333,9 @@ function Home() {
                   reach: t('home.trust.media.partners.echorouk.reach')
                 },
                 {
-                  name: t('home.trust.media.partners.elWatan.name'),
-                  type: t('home.trust.media.partners.elWatan.type'),
-                  reach: t('home.trust.media.partners.elWatan.reach')
+                  name: t('home.trust.media.partners.elwatan.name'),
+                  type: t('home.trust.media.partners.elwatan.type'),
+                  reach: t('home.trust.media.partners.elwatan.reach')
                 },
                 {
                   name: t('home.trust.media.partners.liberte.name'),
@@ -348,14 +348,14 @@ function Home() {
                   reach: t('home.trust.media.partners.tsa.reach')
                 },
                 {
-                  name: t('home.trust.media.partners.elKhabar.name'),
-                  type: t('home.trust.media.partners.elKhabar.type'),
-                  reach: t('home.trust.media.partners.elKhabar.reach')
+                  name: t('home.trust.media.partners.elkhabar.name'),
+                  type: t('home.trust.media.partners.elkhabar.type'),
+                  reach: t('home.trust.media.partners.elkhabar.reach')
                 },
                 {
-                  name: t('home.trust.media.partners.dzEntreprise.name'),
-                  type: t('home.trust.media.partners.dzEntreprise.type'),
-                  reach: t('home.trust.media.partners.dzEntreprise.reach')
+                  name: t('home.trust.media.partners.dzentreprise.name'),
+                  type: t('home.trust.media.partners.dzentreprise.type'),
+                  reach: t('home.trust.media.partners.dzentreprise.reach')
                 }
               ].map((partner) => (
                 <div
@@ -378,7 +378,7 @@ function Home() {
             </div>
             <div className="mt-8 text-center">
               <Button variant="link" className="text-sm text-muted-foreground hover:text-primary">
-                {t('home.trust.media.viewAll')}
+                {t('home.trust.media.viewall')}
                 <ChevronRight className="ml-1 h-4 w-4" />
               </Button>
             </div>
@@ -483,10 +483,10 @@ function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              {t('home.howItWorks.title')}
+              {t('home.howitworks.title')}
             </h2>
             <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-              {t('home.howItWorks.subtitle')}
+              {t('home.howitworks.subtitle')}
             </p>
 
             {/* Path Selection */}
@@ -498,7 +498,7 @@ function Home() {
                 onClick={() => setActiveTab('client')}
               >
                 <User className={`${direction === 'rtl' ? 'ml-2' : 'mr-2'} h-5 w-5`} />
-                {t('home.howItWorks.client')}
+                {t('home.howitworks.client')}
               </Button>
               <Button 
                 variant="outline"
@@ -507,7 +507,7 @@ function Home() {
                 onClick={() => setActiveTab('professional')}
               >
                 <Briefcase className={`${direction === 'rtl' ? 'ml-2' : 'mr-2'} h-5 w-5`} />
-                {t('home.howItWorks.professional')}
+                {t('home.howitworks.professional')}
               </Button>
             </div>
           </div>
@@ -562,7 +562,7 @@ function Home() {
           <div className="mt-20 text-center">
             <div className="inline-flex items-center rounded-full border bg-background px-4 py-1.5 text-sm text-muted-foreground">
               <Star className={`${direction === 'rtl' ? 'ml-2' : 'mr-2'} h-5 w-5 text-primary`} />
-              {t('home.howItWorks.bottomCtaText')}
+              {t('home.howitworks.bottomctatext')}
             </div>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button size="lg" className="min-w-[200px] font-medium">
@@ -570,7 +570,7 @@ function Home() {
                   <ArrowRight 
                     className="h-5 w-5 transition-transform group-hover:translate-x-1"
                   />
-                  <span>{t('home.howItWorks.bottomCta.postProject')}</span>
+                  <span>{t('home.howitworks.bottomcta.postproject')}</span>
                 </div>
               </Button>
               <Button size="lg" variant="outline" className="min-w-[200px] font-medium">
@@ -578,7 +578,7 @@ function Home() {
                   <ArrowRight 
                     className="h-5 w-5 transition-transform group-hover:translate-x-1"
                   />
-                  <span>{t('home.howItWorks.bottomCta.becomeProfessional')}</span>
+                  <span>{t('home.howitworks.bottomcta.becomeprofessional')}</span>
                 </div>
               </Button>
             </div>
@@ -590,36 +590,36 @@ function Home() {
       <section className="bg-muted/50 py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{t('home.successStories.title')}</h2>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{t('home.successstories.title')}</h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              {t('home.successStories.subtitle')}
+              {t('home.successstories.subtitle')}
             </p>
           </div>
 
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                client: t('home.successStories.stories.techStartup.client'),
-                service: t('home.successStories.stories.techStartup.service'),
-                professional: t('home.successStories.stories.techStartup.professional'),
-                description: t('home.successStories.stories.techStartup.description'),
-                result: t('home.successStories.stories.techStartup.result'),
+                client: t('home.successstories.stories.techstartup.client'),
+                service: t('home.successstories.stories.techstartup.service'),
+                professional: t('home.successstories.stories.techstartup.professional'),
+                description: t('home.successstories.stories.techstartup.description'),
+                result: t('home.successstories.stories.techstartup.result'),
                 type: "digital"
               },
               {
-                client: t('home.successStories.stories.villaOwner.client'),
-                service: t('home.successStories.stories.villaOwner.service'),
-                professional: t('home.successStories.stories.villaOwner.professional'),
-                description: t('home.successStories.stories.villaOwner.description'),
-                result: t('home.successStories.stories.villaOwner.result'),
+                client: t('home.successstories.stories.villaowner.client'),
+                service: t('home.successstories.stories.villaowner.service'),
+                professional: t('home.successstories.stories.villaowner.professional'),
+                description: t('home.successstories.stories.villaowner.description'),
+                result: t('home.successstories.stories.villaowner.result'),
                 type: "home"
               },
               {
-                client: t('home.successStories.stories.restaurant.client'),
-                service: t('home.successStories.stories.restaurant.service'),
-                professional: t('home.successStories.stories.restaurant.professional'),
-                description: t('home.successStories.stories.restaurant.description'),
-                result: t('home.successStories.stories.restaurant.result'),
+                client: t('home.successstories.stories.restaurant.client'),
+                service: t('home.successstories.stories.restaurant.service'),
+                professional: t('home.successstories.stories.restaurant.professional'),
+                description: t('home.successstories.stories.restaurant.description'),
+                result: t('home.successstories.stories.restaurant.result'),
                 type: "digital"
               }
             ].map((story, index) => (
@@ -627,7 +627,7 @@ function Home() {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <Badge variant={story.type === "digital" ? "default" : "secondary"}>
-                      {story.type === "digital" ? t('home.successStories.types.digital') : t('home.successStories.types.home')}
+                      {story.type === "digital" ? t('home.successstories.types.digital') : t('home.successstories.types.home')}
                     </Badge>
                     <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
                   </div>
@@ -725,7 +725,7 @@ function Home() {
               size="lg" 
               className={`gap-2 ${direction === 'rtl' ? 'flex-row-reverse' : ''}`}
             >
-              {t('home.professionals.browseAll')}
+              {t('home.professionals.browseall')}
               <ArrowRight className={`${direction === 'rtl' ? 'mr-2 rotate-180' : 'ml-2'} h-4 w-4`} />
             </Button>
           </div>

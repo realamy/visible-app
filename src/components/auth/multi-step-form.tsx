@@ -1,11 +1,8 @@
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Icons } from '@/components/icons'
+import { useTranslation } from 'react-i18next'
 import {
   Form,
   FormControl,
@@ -14,397 +11,203 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { Textarea } from '@/components/ui/textarea'
-import type { UserType } from '@/pages/auth/sign-up'
+import { Icons } from '@/components/icons'
+import { type UserType } from '@/components/auth/user-type-selection'
+import { cn } from '@/lib/utils'
+import { PasswordStrengthIndicator } from '@/components/auth/password-strength-indicator'
 
 // Common schema for both user types
 const basicInfoFields = {
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
-  confirmPassword: z.string()
-} as const
+}
 
-const basicInfoSchema = z.object(basicInfoFields).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
+// Freelancer-specific schema
+const freelancerSchema = z.object({
+  ...basicInfoFields,
+  profession: z.string().min(2, 'Profession is required'),
+  skills: z.string().min(2, 'Skills are required'),
+  experience: z.string().min(2, 'Experience is required'),
+  hourlyRate: z.string().min(1, 'Hourly rate is required'),
 })
 
-// Freelancer-specific schemas
-const professionalInfoFields = {
-  profession: z.string().min(2, 'Profession is required'),
-  experience: z.string().min(1, 'Years of experience is required'),
-  skills: z.string().min(2, 'Skills are required'),
-} as const
-
-const freelancerAdditionalInfoFields = {
-  bio: z.string().min(10, 'Bio must be at least 10 characters'),
-  location: z.string().min(2, 'Location is required'),
-  hourlyRate: z.string().min(1, 'Hourly rate is required'),
-} as const
-
 // Client-specific schema
-const companyInfoFields = {
+const clientSchema = z.object({
+  ...basicInfoFields,
   companyName: z.string().min(2, 'Company name is required'),
   industry: z.string().min(2, 'Industry is required'),
-  companySize: z.string().min(1, 'Company size is required'),
-} as const
+  projectDescription: z.string().min(10, 'Project description must be at least 10 characters'),
+})
 
 interface MultiStepFormProps {
   userType: UserType
+  onSubmit: (data: z.infer<typeof freelancerSchema> | z.infer<typeof clientSchema>) => void
 }
 
-export function MultiStepForm({ userType }: MultiStepFormProps) {
+export function MultiStepForm({ userType, onSubmit }: MultiStepFormProps) {
   const { t } = useTranslation()
-  const [step, setStep] = useState(1)
-  const [isLoading, setIsLoading] = useState(false)
-
-  // Create the appropriate schema based on user type
-  const fullSchema = userType === 'freelancer'
-    ? z.object({
-        ...basicInfoFields,
-        ...professionalInfoFields,
-        ...freelancerAdditionalInfoFields,
-      })
-    : z.object({
-        ...basicInfoFields,
-        ...companyInfoFields,
-      })
-
-  type FormData = z.infer<typeof fullSchema>
-
-  const form = useForm<FormData>({
-    resolver: zodResolver(fullSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      ...(userType === 'freelancer' ? {
-        profession: '',
-        experience: '',
-        skills: '',
-        bio: '',
-        location: '',
-        hourlyRate: '',
-      } : {
-        companyName: '',
-        industry: '',
-        companySize: '',
-      }),
-    },
+  const [currentStep, setCurrentStep] = React.useState(0)
+  const schema = userType === 'freelancer' ? freelancerSchema : clientSchema
+  
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    mode: 'onChange',
   })
 
-  const totalSteps = userType === 'freelancer' ? 3 : 2
-  const progress = (step / totalSteps) * 100
+  const steps = userType === 'freelancer' 
+    ? [
+        { title: t('auth.steps.basicinfo'), fields: ['name', 'email', 'password'] },
+        { title: t('auth.steps.professional'), fields: ['profession', 'skills'] },
+        { title: t('auth.steps.experience'), fields: ['experience', 'hourlyRate'] },
+      ]
+    : [
+        { title: t('auth.steps.basicinfo'), fields: ['name', 'email', 'password'] },
+        { title: t('auth.steps.company'), fields: ['companyName', 'industry'] },
+        { title: t('auth.steps.project'), fields: ['projectDescription'] },
+      ]
 
-  const onSubmit = async (data: FormData) => {
-    if (step < totalSteps) {
-      setStep(step + 1)
-      return
-    }
+  const totalSteps = steps.length
+  const progress = ((currentStep + 1) / totalSteps) * 100
 
-    try {
-      setIsLoading(true)
-      // Handle final submission here
-      console.log('Form submitted:', data)
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setIsLoading(false)
+  const renderStepIndicators = () => (
+    <div className="mb-8">
+      <div className="flex justify-between mb-2">
+        {steps.map((step, index) => (
+          <div
+            key={index}
+            className={cn(
+              "flex items-center justify-center w-8 h-8 rounded-full border",
+              index === currentStep && "bg-primary text-primary-foreground border-primary",
+              index < currentStep && "bg-primary/20 border-primary/20",
+              index > currentStep && "bg-background border-input"
+            )}
+          >
+            {index < currentStep ? (
+              <Icons.check className="w-4 h-4" />
+            ) : (
+              <span>{index + 1}</span>
+            )}
+          </div>
+        ))}
+      </div>
+      <Progress value={progress} className="h-1" />
+    </div>
+  )
+
+  const renderCurrentStep = () => {
+    const currentFields = steps[currentStep].fields
+    
+    return (
+      <div className="space-y-4">
+        {currentFields.map((field) => (
+          <FormField
+            key={field}
+            control={form.control}
+            name={field}
+            render={({ field: formField }) => (
+              <FormItem>
+                <FormLabel>{t(`auth.fields.${field}`)}</FormLabel>
+                {field === 'password' ? (
+                  <div className="space-y-2">
+                    <FormControl>
+                      <Input
+                        type="password"
+                        {...formField}
+                        onChange={(e) => {
+                          formField.onChange(e)
+                          form.trigger('password')
+                        }}
+                      />
+                    </FormControl>
+                    {formField.value && (
+                      <PasswordStrengthIndicator
+                        strength={calculatePasswordStrength(formField.value)}
+                      />
+                    )}
+                  </div>
+                ) : field === 'projectDescription' ? (
+                  <FormControl>
+                    <Textarea {...formField} />
+                  </FormControl>
+                ) : (
+                  <FormControl>
+                    <Input {...formField} />
+                  </FormControl>
+                )}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        ))}
+      </div>
+    )
+  }
+
+  const handleNext = async () => {
+    const currentFields = steps[currentStep].fields
+    const isValid = await form.trigger(currentFields as any)
+    
+    if (isValid) {
+      if (currentStep < totalSteps - 1) {
+        setCurrentStep(prev => prev + 1)
+      } else {
+        onSubmit(form.getValues())
+      }
     }
   }
 
   const handleBack = () => {
-    if (step > 1) {
-      setStep(step - 1)
+    if (currentStep > 0) {
+      setCurrentStep(prev => prev - 1)
     }
   }
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">
-          {t('auth.createAccount')}
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          {userType === 'freelancer' 
-            ? t('auth.createFreelancerAccount')
-            : t('auth.createClientAccount')
-          }
-        </p>
-      </div>
-
-      <Progress value={progress} className="h-1" />
-      
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          {/* Step 1: Basic Info (Common for both types) */}
-          {step === 1 && (
-            <div className="space-y-4">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('auth.name')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('auth.namePlaceholder')} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('auth.email')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('auth.emailPlaceholder')} type="email" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('auth.password')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('auth.passwordPlaceholder')} type="password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="confirmPassword"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('auth.confirmPassword')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('auth.confirmPasswordPlaceholder')} type="password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          )}
-
-          {/* Step 2: Professional Info (Freelancer) or Company Info (Client) */}
-          {step === 2 && userType === 'freelancer' && (
-            <div className="space-y-4">
-              <FormField
-                control={form.control}
-                name="profession"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('auth.profession')}</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={t('auth.selectProfession')} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="developer">Developer</SelectItem>
-                        <SelectItem value="designer">Designer</SelectItem>
-                        <SelectItem value="writer">Writer</SelectItem>
-                        <SelectItem value="marketer">Marketer</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="experience"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('auth.experience')}</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={t('auth.selectExperience')} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="1-2">1-2 years</SelectItem>
-                        <SelectItem value="3-5">3-5 years</SelectItem>
-                        <SelectItem value="5-10">5-10 years</SelectItem>
-                        <SelectItem value="10+">10+ years</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="skills"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('auth.skills')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('auth.skillsPlaceholder')} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          )}
-
-          {step === 2 && userType === 'client' && (
-            <div className="space-y-4">
-              <FormField
-                control={form.control}
-                name="companyName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('auth.companyName')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('auth.companyNamePlaceholder')} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="industry"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('auth.industry')}</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={t('auth.selectIndustry')} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="technology">Technology</SelectItem>
-                        <SelectItem value="healthcare">Healthcare</SelectItem>
-                        <SelectItem value="finance">Finance</SelectItem>
-                        <SelectItem value="education">Education</SelectItem>
-                        <SelectItem value="retail">Retail</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="companySize"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('auth.companySize')}</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={t('auth.selectCompanySize')} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="1-10">1-10 employees</SelectItem>
-                        <SelectItem value="11-50">11-50 employees</SelectItem>
-                        <SelectItem value="51-200">51-200 employees</SelectItem>
-                        <SelectItem value="201-500">201-500 employees</SelectItem>
-                        <SelectItem value="501+">501+ employees</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          )}
-
-          {/* Step 3: Additional Info (Freelancer only) */}
-          {step === 3 && userType === 'freelancer' && (
-            <div className="space-y-4">
-              <FormField
-                control={form.control}
-                name="bio"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('auth.bio')}</FormLabel>
-                    <FormControl>
-                      <Textarea 
-                        placeholder={t('auth.bioPlaceholder')}
-                        className="min-h-[100px]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="location"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('auth.location')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('auth.locationPlaceholder')} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="hourlyRate"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('auth.hourlyRate')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('auth.hourlyRatePlaceholder')} type="number" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          )}
-
-          <div className="flex gap-4">
-            {step > 1 && (
-              <Button
-                type="button"
-                variant="outline"
-                onClick={handleBack}
-                className="w-full"
-              >
-                {t('common.back')}
-              </Button>
-            )}
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading && (
-                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-              )}
-              {step === totalSteps ? t('auth.createAccount') : t('common.next')}
-            </Button>
-          </div>
-        </form>
-      </Form>
-    </div>
+    <Form {...form}>
+      <form className="space-y-6">
+        {renderStepIndicators()}
+        <div className="min-h-[300px]">
+          {renderCurrentStep()}
+        </div>
+        <div className="flex justify-between pt-4">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handleBack}
+            disabled={currentStep === 0}
+          >
+            {t('auth.buttons.back')}
+          </Button>
+          <Button type="button" onClick={handleNext}>
+            {currentStep === totalSteps - 1 
+              ? t('auth.buttons.submit')
+              : t('auth.buttons.next')}
+          </Button>
+        </div>
+      </form>
+    </Form>
   )
+}
+
+function calculatePasswordStrength(password: string): number {
+  let strength = 0
+  
+  // Length check
+  if (password.length >= 8) strength += 25
+  
+  // Contains number
+  if (/\d/.test(password)) strength += 25
+  
+  // Contains lowercase
+  if (/[a-z]/.test(password)) strength += 25
+  
+  // Contains uppercase
+  if (/[A-Z]/.test(password)) strength += 25
+  
+  return strength
 }

@@ -84,33 +84,33 @@ const MobileNav = () => {
       title: t('menu.sections.profile.title'),
       items: [
         {
-          name: t('menu.sections.profile.yourProfile'),
+          name: t('menu.sections.profile.yourprofile'),
           href: '/profile',
           icon: UserCircle,
-          description: t('menu.sections.profile.viewProfile'),
+          description: t('menu.sections.profile.viewprofile'),
         },
         {
           name: t('menu.sections.profile.settings'),
           href: '/settings',
           icon: Settings,
-          description: t('menu.sections.profile.manageAccount'),
+          description: t('menu.sections.profile.manageaccount'),
         },
       ],
     },
     {
-      title: t('menu.sections.findWork.title'),
+      title: t('menu.sections.findwork.title'),
       items: [
         {
-          name: t('menu.sections.findWork.browseServices'),
+          name: t('menu.sections.findwork.browseservices'),
           href: '/services',
           icon: Grid,
-          description: t('menu.sections.findWork.exploreServices'),
+          description: t('menu.sections.findwork.exploreservices'),
         },
         {
-          name: t('menu.sections.findWork.findFreelancers'),
+          name: t('menu.sections.findwork.findfreelancers'),
           href: '/freelancers',
           icon: Users,
-          description: t('menu.sections.findWork.connectProfessionals'),
+          description: t('menu.sections.findwork.connectprofessionals'),
         },
       ],
     },
@@ -118,10 +118,10 @@ const MobileNav = () => {
       title: t('menu.sections.support.title'),
       items: [
         {
-          name: t('menu.sections.support.helpCenter'),
+          name: t('menu.sections.support.helpcenter'),
           href: '/help',
           icon: HelpCircle,
-          description: t('menu.sections.support.getHelp'),
+          description: t('menu.sections.support.gethelp'),
         },
       ],
     },
@@ -132,10 +132,10 @@ const MobileNav = () => {
       title: t('menu.sections.account.title'),
       items: [
         {
-          name: t('menu.sections.account.signIn'),
+          name: t('menu.sections.account.signin'),
           href: '#',
           icon: LogInIcon,
-          description: t('menu.sections.account.signInDesc'),
+          description: t('menu.sections.account.signindesc'),
           onClick: () => {
             login()
             setIsMobileMenuOpen(false)
@@ -143,28 +143,28 @@ const MobileNav = () => {
           className: 'text-primary hover:text-primary-600',
         },
         {
-          name: t('menu.sections.account.createAccount'),
+          name: t('menu.sections.account.createaccount'),
           href: '/signup',
           icon: UserPlus,
-          description: t('menu.sections.account.createAccountDesc'),
+          description: t('menu.sections.account.createaccountdesc'),
           className: 'text-primary hover:text-primary-600',
         },
       ],
     },
     {
-      title: t('menu.sections.findWork.title'),
+      title: t('menu.sections.findwork.title'),
       items: [
         {
-          name: t('menu.sections.findWork.browseServices'),
+          name: t('menu.sections.findwork.browseservices'),
           href: '/services',
           icon: Grid,
-          description: t('menu.sections.findWork.exploreServices'),
+          description: t('menu.sections.findwork.exploreservices'),
         },
         {
-          name: t('menu.sections.findWork.findFreelancers'),
+          name: t('menu.sections.findwork.findfreelancers'),
           href: '/freelancers',
           icon: Users,
-          description: t('menu.sections.findWork.connectProfessionals'),
+          description: t('menu.sections.findwork.connectprofessionals'),
         },
       ],
     },
@@ -172,10 +172,10 @@ const MobileNav = () => {
       title: t('menu.sections.support.title'),
       items: [
         {
-          name: t('menu.sections.support.helpCenter'),
+          name: t('menu.sections.support.helpcenter'),
           href: '/help',
           icon: HelpCircle,
-          description: t('menu.sections.support.getHelp'),
+          description: t('menu.sections.support.gethelp'),
         },
       ],
     },
@@ -361,9 +361,9 @@ const MobileNav = () => {
                       <LogOut className="w-4 h-4 text-red-500" />
                     </div>
                     <div className="flex-1 min-w-0 text-left rtl:text-right">
-                      <div className="font-medium truncate">{t('menu.sections.account.signOut')}</div>
+                      <div className="font-medium truncate">{t('menu.sections.account.signout')}</div>
                       <p className="text-sm text-muted-foreground truncate">
-                        {t('menu.sections.account.signOutDesc')}
+                        {t('menu.sections.account.signoutdesc')}
                       </p>
                     </div>
                   </button>

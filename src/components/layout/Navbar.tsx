@@ -71,7 +71,7 @@ const UserDropdownContent = () => {
                 {user?.name || t('nav.guest')}
               </p>
               <p className="text-sm text-muted-foreground truncate mt-1.5">
-                {user?.email || t('nav.signInToAccess')}
+                {user?.email || t('nav.signintoaccess')}
               </p>
             </div>
           </DropdownMenuItem>
@@ -120,7 +120,7 @@ const UserDropdownContent = () => {
                 className="flex items-center gap-3 px-3 py-2.5 w-full cursor-pointer"
               >
                 <LogIn className="h-[18px] w-[18px]" />
-                <span className="text-[15px]">{t('nav.signIn')}</span>
+                <span className="text-[15px]">{t('nav.signin')}</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="p-0">
@@ -129,7 +129,7 @@ const UserDropdownContent = () => {
                 className="flex items-center gap-3 px-3 py-2.5 w-full cursor-pointer"
               >
                 <UserPlus className="h-[18px] w-[18px]" />
-                <span className="text-[15px]">{t('nav.signUp')}</span>
+                <span className="text-[15px]">{t('nav.signup')}</span>
               </Link>
             </DropdownMenuItem>
           </>
@@ -146,7 +146,7 @@ const UserDropdownContent = () => {
             className="flex items-center gap-3 px-3 py-2.5 w-full cursor-pointer"
           >
             <HelpCircle className="h-[18px] w-[18px]" />
-            <span className="text-[15px]">{t('nav.helpAndSupport')}</span>
+            <span className="text-[15px]">{t('nav.helpandsupport')}</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild className="p-0">
@@ -164,7 +164,7 @@ const UserDropdownContent = () => {
             onClick={logout}
           >
             <LogOut className="h-[18px] w-[18px]" />
-            <span className="text-[15px]">{t('nav.signOut')}</span>
+            <span className="text-[15px]">{t('nav.signout')}</span>
           </DropdownMenuItem>
         )}
       </div>
@@ -179,9 +179,9 @@ const SearchDialog = () => {
   return (
     <DialogContent className="sm:max-w-[600px]">
       <DialogHeader>
-        <DialogTitle>{t('nav.searchDialog.title')}</DialogTitle>
+        <DialogTitle>{t('nav.searchdialog.title')}</DialogTitle>
         <DialogDescription>
-          {t('nav.searchDialog.description')}
+          {t('nav.searchdialog.description')}
         </DialogDescription>
       </DialogHeader>
       <div className="grid gap-4 py-4">
@@ -189,7 +189,7 @@ const SearchDialog = () => {
           <Search className="h-4 w-4 text-muted-foreground" />
           <Input
             id="search"
-            placeholder={t('nav.searchDialog.placeholder')} 
+            placeholder={t('nav.searchdialog.placeholder')} 
           />
           <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
             <span className="text-xs">⌘</span>K
@@ -207,16 +207,16 @@ const SearchDialog = () => {
         {query ? (
           <div className="space-y-4">
             {/* Add search results here */}
-            <p className="text-sm text-muted-foreground">{t('nav.searchDialog.noResults')}</p>
+            <p className="text-sm text-muted-foreground">{t('nav.searchdialog.noresults')}</p>
           </div>
         ) : (
           <div className="space-y-4">
             <div>
-              <h4 className="mb-2 text-sm font-medium">{t('nav.searchDialog.trending')}</h4>
+              <h4 className="mb-2 text-sm font-medium">{t('nav.searchdialog.trending')}</h4>
               {/* Add trending searches */}
             </div>
             <div>
-              <h4 className="mb-2 text-sm font-medium">{t('nav.searchDialog.recent')}</h4>
+              <h4 className="mb-2 text-sm font-medium">{t('nav.searchdialog.recent')}</h4>
               {/* Add recent searches */}
             </div>
           </div>
@@ -316,7 +316,7 @@ const Navbar = () => {
                           "active:scale-[0.98] active:transition-none"
                         )}
                       >
-                        {t('nav.myProjects')}
+                        {t('nav.myprojects')}
                       </Link>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
@@ -354,7 +354,7 @@ const Navbar = () => {
                     className="w-[180px] xl:w-[250px] justify-start text-muted-foreground hover:bg-muted transition-colors truncate"
                   >
                     <Search className="h-4 w-4 min-w-[16px] mr-2" />
-                    <span className="hidden xl:inline-block truncate">{t('nav.searchPlaceholder')}</span>
+                    <span className="hidden xl:inline-block truncate">{t('nav.searchplaceholder')}</span>
                     <span className="xl:hidden">{t('nav.search')}</span>
                     <span className="hidden xl:inline-flex ml-auto text-xs text-muted-foreground/50">⌘K</span>
                   </Button>
@@ -374,7 +374,7 @@ const Navbar = () => {
                         <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
                       </Avatar>
                     <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-primary" />
-                    <span className="sr-only">{t('nav.userMenu')}</span>
+                    <span className="sr-only">{t('nav.usermenu')}</span>
                   </Button>
                 </DropdownMenuTrigger>
                 <UserDropdownContent />
@@ -387,14 +387,14 @@ const Navbar = () => {
                 className="hover:bg-muted transition-colors whitespace-nowrap"
                 onClick={login}
               >
-                {t('nav.signIn')}
+                {t('nav.signin')}
               </Button>
               <Link 
                 to="/signup" 
                 className="hidden md:inline-flex h-10 px-6 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full items-center gap-2 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-sm"
               >
                 <Sparkles className="h-4 w-4" />
-                <span className="font-medium">{t('nav.getStarted')}</span>
+                <span className="font-medium">{t('nav.getstarted')}</span>
               </Link>
             </>
           )}
@@ -417,13 +417,13 @@ const Navbar = () => {
               <DialogHeader>
                 <DialogTitle>{t('nav.search')}</DialogTitle>
                 <DialogDescription>
-                  {t('nav.searchDescription')}
+                  {t('nav.searchdescription')}
                 </DialogDescription>
               </DialogHeader>
               <div className="flex w-full max-w-sm items-center space-x-2">
                 <Input 
                   type="text"
-                  placeholder={t('nav.searchPlaceholder')} 
+                  placeholder={t('nav.searchplaceholder')} 
                 />
               </div>
             </DialogContent>
@@ -444,7 +444,7 @@ const Navbar = () => {
                 ) : (
                   <User className="h-6 w-6" />
                 )}
-                <span className="sr-only">{t('nav.userMenu')}</span>
+                <span className="sr-only">{t('nav.usermenu')}</span>
               </Button>
             </DropdownMenuTrigger>
             <UserDropdownContent />
@@ -457,7 +457,7 @@ const Navbar = () => {
             >
               <Link to="/signup" className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4" />
-                <span className="font-medium">{t('nav.getStarted')}</span>
+                <span className="font-medium">{t('nav.getstarted')}</span>
               </Link>
             </Button>
           )}

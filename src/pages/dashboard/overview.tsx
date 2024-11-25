@@ -64,12 +64,12 @@ export default function DashboardOverview() {
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline">
-            {t('dashboard.actions.editProfile')}
+            {t('dashboard.actions.editprofile')}
           </Button>
           <Button asChild>
             <Link to="/profile">
             <ExternalLink className="mr-2 h-4 w-4" />
-            {t('dashboard.actions.viewProfile')}
+            {t('dashboard.actions.viewprofile')}
             </Link>
           </Button>
         </div>
@@ -101,7 +101,7 @@ export default function DashboardOverview() {
                   {stat.trend}
                 </span>
                 <span className="text-muted-foreground ml-1">
-                  {t('dashboard.stats.fromLastMonth')}
+                  {t('dashboard.stats.fromlastmonth')}
                 </span>
               </div>
             </CardContent>
@@ -112,13 +112,13 @@ export default function DashboardOverview() {
       {/* Recent Activity */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('dashboard.recentActivity.title')}</CardTitle>
+          <CardTitle>{t('dashboard.recentactivity.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-8">
             {/* Activity items will go here */}
             <div className="text-center text-sm text-muted-foreground">
-              {t('dashboard.recentActivity.empty')}
+              {t('dashboard.recentactivity.empty')}
             </div>
           </div>
         </CardContent>
@@ -130,12 +130,12 @@ export default function DashboardOverview() {
           <CardTitle>{t('dashboard.earnings.title')}</CardTitle>
           <Button variant="outline" size="sm">
             <BarChart className="mr-2 h-4 w-4" />
-            {t('dashboard.earnings.viewReport')}
+            {t('dashboard.earnings.viewreport')}
           </Button>
         </CardHeader>
         <CardContent>
           <div className="h-[300px] flex items-center justify-center text-sm text-muted-foreground">
-            {t('dashboard.earnings.chartPlaceholder')}
+            {t('dashboard.earnings.chartplaceholder')}
           </div>
         </CardContent>
       </Card>

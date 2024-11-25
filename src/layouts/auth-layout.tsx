@@ -45,10 +45,10 @@ export default function AuthLayout() {
                   </div>
                   <div className="space-y-1">
                     <h3 className="text-lg font-semibold text-foreground">
-                      {t('brand.feature1Title')}
+                      {t('brand.feature1title')}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      {t('brand.feature1Description')}
+                      {t('brand.feature1description')}
                     </p>
                   </div>
                 </div>
@@ -59,10 +59,10 @@ export default function AuthLayout() {
                   </div>
                   <div className="space-y-1">
                     <h3 className="text-lg font-semibold text-foreground">
-                      {t('brand.feature2Title')}
+                      {t('brand.feature2title')}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      {t('brand.feature2Description')}
+                      {t('brand.feature2description')}
                     </p>
                   </div>
                 </div>
@@ -73,10 +73,10 @@ export default function AuthLayout() {
                   </div>
                   <div className="space-y-1">
                     <h3 className="text-lg font-semibold text-foreground">
-                      {t('brand.feature3Title')}
+                      {t('brand.feature3title')}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      {t('brand.feature3Description')}
+                      {t('brand.feature3description')}
                     </p>
                   </div>
                 </div>
@@ -88,21 +88,21 @@ export default function AuthLayout() {
                 <div className="flex flex-col items-center text-center p-4 rounded-xl bg-primary/10 backdrop-blur-sm space-y-2">
                   <Icons.verified className="w-6 h-6 text-primary" />
                   <h3 className="text-sm font-semibold text-foreground">
-                    {t('brand.feature1Title')}
+                    {t('brand.feature1title')}
                   </h3>
                 </div>
 
                 <div className="flex flex-col items-center text-center p-4 rounded-xl bg-primary/10 backdrop-blur-sm space-y-2">
                   <Icons.shield className="w-6 h-6 text-primary" />
                   <h3 className="text-sm font-semibold text-foreground">
-                    {t('brand.feature2Title')}
+                    {t('brand.feature2title')}
                   </h3>
                 </div>
 
                 <div className="flex flex-col items-center text-center p-4 rounded-xl bg-primary/10 backdrop-blur-sm space-y-2 col-span-2 sm:col-span-1">
                   <Icons.wallet className="w-6 h-6 text-primary" />
                   <h3 className="text-sm font-semibold text-foreground">
-                    {t('brand.feature3Title')}
+                    {t('brand.feature3title')}
                   </h3>
                 </div>
               </div>

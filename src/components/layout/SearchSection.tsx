@@ -200,7 +200,7 @@ export function SearchSection() {
             className="flex-1 gap-2"
           >
             <Map className="h-4 w-4" />
-            <span>{t('search.buttons.viewMap')}</span>
+            <span>{t('search.buttons.viewmap')}</span>
           </Button>
 
           <Button 

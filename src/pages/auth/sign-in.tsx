@@ -58,21 +58,21 @@ export default function SignInPage() {
     <div className="w-full max-w-[400px] space-y-8">
       <div className="flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">
-          {t('auth.welcomeBack')}
+          {t('auth.welcomeback')}
         </h1>
         <p className="text-sm text-muted-foreground">
-          {t('auth.signInDescription')}
+          {t('auth.signindescription')}
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-6">
-        <Button variant="outline" className="w-full" type="button">
-          <Icons.google className="mr-2 h-4 w-4" />
-          {t('auth.continueWithGoogle')}
-        </Button>
+      <div className="flex flex-col space-y-3">
         <Button variant="outline" className="w-full" type="button">
           <Icons.facebook className="mr-2 h-4 w-4" />
-          {t('auth.continueWithFacebook')}
+          {t('auth.continuewithfacebook')}
+        </Button>
+        <Button variant="outline" className="w-full" type="button">
+          <Icons.google className="mr-2 h-4 w-4" />
+          {t('auth.continuewithgoogle')}
         </Button>
       </div>
 
@@ -82,7 +82,7 @@ export default function SignInPage() {
         </div>
         <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-card px-2 text-muted-foreground">
-            {t('auth.orContinueWith')}
+            {t('auth.orcontinuewith')}
           </span>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function SignInPage() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('auth.email')}</FormLabel>
+                <FormLabel>{t('auth.fields.email')}</FormLabel>
                 <FormControl>
                   <Input
                     type="email"
@@ -113,12 +113,12 @@ export default function SignInPage() {
               <FormItem>
                 <FormLabel>
                   <span className="flex items-center justify-between">
-                    {t('auth.password')}
+                    {t('auth.fields.password')}
                     <Link
                       to="/auth/reset-password"
                       className="text-xs font-normal text-muted-foreground hover:text-primary"
                     >
-                      {t('auth.forgotPassword')}
+                      {t('auth.forgotpassword')}
                     </Link>
                   </span>
                 </FormLabel>
@@ -133,18 +133,18 @@ export default function SignInPage() {
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            {t('auth.signIn')}
+            {t('auth.signin')}
           </Button>
         </form>
       </Form>
 
       <p className="text-center text-sm text-muted-foreground">
-        {t('auth.noAccount')}{' '}
+        {t('auth.noaccount')}{' '}
         <Link
           to="/auth/sign-up"
           className="font-medium hover:text-primary underline underline-offset-4"
         >
-          {t('auth.createAccount')}
+          {t('auth.createaccount')}
         </Link>
       </p>
     </div>
