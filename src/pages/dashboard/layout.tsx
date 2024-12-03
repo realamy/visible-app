@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next"
 import { cn } from "@/lib/utils"
 import { useLanguage } from "@/contexts/language-context"
+import { useAuth } from "@/contexts/auth-context"
 import { 
-  Sidebar, 
+  // Sidebar, 
   SidebarContent,
   SidebarHeader,
   SidebarProvider, 
@@ -11,101 +12,184 @@ import {
   SidebarMenuButton,
   SidebarTrigger
 } from "@/components/ui/sidebar"
-import { LayoutDashboard, Briefcase, MessageSquare, Settings, Wallet, Star, Clock } from "lucide-react"
-import { Link, useLocation } from "react-router-dom"
+import { Sidebar } from "./sidebar"
+import { 
+  LayoutDashboard, 
+  Briefcase, 
+  MessageSquare, 
+  Settings, 
+  Wallet, 
+  Star, 
+  Clock,
+  Users,
+  FileText,
+  Search
+} from "lucide-react"
+import { Link, useLocation, Navigate } from "react-router-dom"
 import { Outlet } from "react-router-dom"
-
-interface DashboardLayoutProps {
-  children: React.ReactNode
-}
-
-const navigation = [
-  {
-    name: "dashboard.nav.overview",
-    href: "/dashboard",
-    icon: LayoutDashboard,
-    end: true,
-  },
-  {
-    name: "dashboard.nav.projects",
-    href: "/dashboard/projects",
-    icon: Briefcase,
-  },
-  {
-    name: "dashboard.nav.messages",
-    href: "/dashboard/messages",
-    icon: MessageSquare,
-  },
-  {
-    name: "dashboard.nav.earnings",
-    href: "/dashboard/earnings",
-    icon: Wallet,
-  },
-  {
-    name: "dashboard.nav.reviews",
-    href: "/dashboard/reviews",
-    icon: Star,
-  },
-  {
-    name: "dashboard.nav.availability",
-    href: "/dashboard/availability",
-    icon: Clock,
-  },
-  {
-    name: "dashboard.nav.settings",
-    href: "/dashboard/settings",
-    icon: Settings,
-  },
-]
 
 export default function DashboardLayout() {
   const { t } = useTranslation()
-  const { language } = useLanguage()
-  const { pathname } = useLocation()
-  const isRTL = language === 'ar'
+  const { isRtl } = useLanguage()
+  const location = useLocation()
+  const { user, isAuthenticated } = useAuth()
+
+  if (!isAuthenticated || !user) {
+    return <Navigate to="/auth/sign-in" replace />
+  }
+
+  const freelancerMenuItems = [
+    {
+      icon: LayoutDashboard,
+      label: t("dashboard.nav.overview"),
+      to: "/dashboard",
+    },
+    {
+      icon: Briefcase,
+      label: t("dashboard.nav.projects"),
+      to: "/dashboard/projects",
+    },
+    {
+      icon: MessageSquare,
+      label: t("dashboard.nav.messages"),
+      to: "/dashboard/messages",
+    },
+    {
+      icon: Wallet,
+      label: t("dashboard.nav.earnings"),
+      to: "/dashboard/earnings",
+    },
+    {
+      icon: Star,
+      label: t("dashboard.nav.reviews"),
+      to: "/dashboard/reviews",
+    },
+  ]
+
+  const clientMenuItems = [
+    {
+      icon: LayoutDashboard,
+      label: t("dashboard.nav.overview"),
+      to: "/dashboard",
+    },
+    {
+      icon: Briefcase,
+      label: t("dashboard.nav.projects"),
+      to: "/dashboard/projects",
+    },
+    {
+      icon: MessageSquare,
+      label: t("dashboard.nav.messages"),
+      to: "/dashboard/messages",
+    },
+    {
+      icon: Users, 
+      label: t("dashboard.nav.freelancers"),
+      to: "/dashboard/freelancers",
+    },
+    {
+      icon: FileText,
+      label: t("dashboard.nav.contracts"),
+      to: "/dashboard/contracts",
+    },
+  ]
+
+  const menuItems = user.role === 'freelancer' ? freelancerMenuItems : clientMenuItems
+
+  const commonMenuItems = [
+    {
+      icon: Settings,
+      label: t("dashboard.nav.settings"),
+      to: "/dashboard/settings",
+    },
+  ]
 
   return (
-    <div className="mx-auto max-w-screen-2xl">
+    <SidebarProvider >
       <div className={cn(
-        "flex h-[calc(100vh-4rem)]",
-        isRTL && "flex-row-reverse"
+        "flex h-screen bg-background/95 antialiased",
+        isRtl && "flex-row-reverse"
       )}>
-        <SidebarProvider defaultOpen>
-          <Sidebar>
-            <SidebarHeader className="flex h-14 items-center border-b px-4">
-              <SidebarTrigger />
-              <span className="ml-2 text-lg font-semibold">
-                {t('dashboard.overview.title')}
+        <Sidebar />
+        {/* <Sidebar className={cn(
+          "border-r bg-card shadow-sm transition-all duration-200",
+          isRtl ? "border-l border-r-0" : "border-r",
+          "w-64 lg:w-72"
+        )}>
+          <SidebarHeader className="h-16 flex items-center px-6 border-b">
+            <SidebarTrigger className="lg:hidden" />
+            <Link to="/dashboard" className={cn(
+              "flex items-center gap-2",
+              isRtl && "flex-row-reverse"
+            )}>
+              <LayoutDashboard className="h-5 w-5" />
+              <span className="text-lg font-semibold">
+                {t("brand.name")}
               </span>
-            </SidebarHeader>
-            <SidebarContent className="flex flex-col gap-4">
-              <SidebarMenu>
-                {navigation.map((item) => {
-                  const isActive = item.end 
-                    ? pathname === item.href
-                    : pathname.startsWith(item.href)
-
-                  return (
-                    <SidebarMenuItem key={item.name}>
-                      <SidebarMenuButton asChild isActive={isActive}>
-                        <Link to={item.href}>
-                          <item.icon className="h-4 w-4" />
-                          <span>{t(item.name)}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  )
-                })}
-              </SidebarMenu>
-            </SidebarContent>
-          </Sidebar>
-        </SidebarProvider>
-        <div className="flex-1 border-l dark:border-l-slate-800">
-          <div className="h-full px-6 py-8">
+            </Link>
+          </SidebarHeader>
+          <SidebarContent className="p-2">
+            <SidebarMenu>
+              {menuItems.map((item) => (
+                <SidebarMenuItem key={item.to} className="my-0.5">
+                  <SidebarMenuButton
+                    asChild
+                    active={location.pathname === item.to}
+                    className={cn(
+                      "w-full px-3 py-2 rounded-md transition-colors",
+                      "hover:bg-accent hover:text-accent-foreground",
+                      "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+                      isRtl && "flex-row-reverse text-right"
+                    )}
+                  >
+                    <Link to={item.to} className="flex items-center gap-3 w-full">
+                      <item.icon className={cn(
+                        "h-4 w-4 shrink-0",
+                        location.pathname === item.to ? "text-primary" : "text-muted-foreground"
+                      )} />
+                      <span className={cn(
+                        "flex-1",
+                        location.pathname === item.to ? "font-medium text-primary" : "text-muted-foreground"
+                      )}>{item.label}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+              <div className="my-4 border-t" />
+              {commonMenuItems.map((item) => (
+                <SidebarMenuItem key={item.to} className="my-0.5">
+                  <SidebarMenuButton
+                    asChild
+                    active={location.pathname === item.to}
+                    className={cn(
+                      "w-full px-3 py-2 rounded-md transition-colors",
+                      "hover:bg-accent hover:text-accent-foreground",
+                      "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+                      isRtl && "flex-row-reverse text-right"
+                    )}
+                  >
+                    <Link to={item.to} className="flex items-center gap-3 w-full">
+                      <item.icon className={cn(
+                        "h-4 w-4 shrink-0",
+                        location.pathname === item.to ? "text-primary" : "text-muted-foreground"
+                      )} />
+                      <span className={cn(
+                        "flex-1",
+                        location.pathname === item.to ? "font-medium text-primary" : "text-muted-foreground"
+                      )}>{item.label}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarContent>
+        </Sidebar> */}
+        <main className="flex-1 overflow-y-auto bg-background">
+          <div className="h-full px-4 py-6 lg:px-8">
             <Outlet />
           </div>
-        </div>
+        </main>
       </div>
-    </div>
+    </SidebarProvider>
   )
 }

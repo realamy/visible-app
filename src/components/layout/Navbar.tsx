@@ -13,7 +13,8 @@ import {
   Briefcase, 
   LogOut,
   Mail,
-  Command
+  Command,
+  UserCircle
 } from 'lucide-react'
 import { useAuth } from "@/contexts/auth-context"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -46,10 +47,20 @@ import { useState } from "react"
 import { LayoutDashboard, MessageSquare, HelpCircle, MessageCircle } from 'lucide-react'
 import { Separator } from "@/components/ui/separator"
 import { Sparkles } from 'lucide-react'
+import { useLanguage } from '@/contexts/language-context'
+import { LanguageCode } from '@/data/categories'
 
 const UserDropdownContent = () => {
   const { t } = useTranslation();
-  const { user, logout } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth()
+  const { language, setLanguage } = useLanguage();
+
+  // Available languages
+  const languages = [
+    { code: 'en' as LanguageCode, name: 'English' },
+    { code: 'fr' as LanguageCode, name: 'Français' },
+    { code: 'ar' as LanguageCode, name: 'العربية', dir: 'rtl' }
+  ];
 
   return (
     <DropdownMenuContent 
@@ -62,10 +73,16 @@ const UserDropdownContent = () => {
       <div className="p-3">
         <div className="">
           <DropdownMenuItem className="bg-transparent hover:transparent flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-            <Avatar className="h-11 w-11">
-              <AvatarImage src={user?.avatar} />
-              <AvatarFallback>{user?.name?.[0]}</AvatarFallback>
-            </Avatar>
+            {isAuthenticated ? (
+              <Avatar className="h-11 w-11">
+                <AvatarImage src={user?.avatar} />
+                <AvatarFallback>{user?.name?.[0]}</AvatarFallback>
+              </Avatar>
+            ) : (
+              <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center ring-2 ring-primary/20">
+                <UserCircle className="w-7 h-7 text-primary" />
+              </div>
+            )}
             <div className="ml-3 overflow-hidden">
               <p className="text-[15px] font-medium leading-none truncate">
                 {user?.name || t('nav.guest')}
@@ -136,6 +153,27 @@ const UserDropdownContent = () => {
         )}
       </div>
 
+      <DropdownMenuSeparator className="my-1" />
+
+      {/* Language Switcher */}
+      <div className="px-3 py-2">
+        <p className="text-sm font-medium text-muted-foreground mb-2">{t('menu.language.title')}</p>
+        <div className="grid grid-cols-3 gap-1">
+          {languages.map((lang) => (
+            <Button
+              key={lang.code}
+              variant={language === lang.code ? "default" : "ghost"}
+              className={cn(
+                "w-full justify-start",
+                language === lang.code && "bg-primary text-primary-foreground"
+              )}
+              onClick={() => setLanguage(lang.code)}
+            >
+              <span className="text-[13px]">{lang.name}</span>
+            </Button>
+          ))}
+        </div>
+      </div>
       <DropdownMenuSeparator className="my-1" />
 
       {/* Footer Menu Items */}
@@ -367,12 +405,17 @@ const Navbar = () => {
                     variant="ghost" 
                     size="sm" 
                     className="relative h-10 w-10 rounded-full ring-offset-background transition-colors hover:bg-muted"
-
                   >
+                    {isAuthenticated ? (
                       <Avatar className="h-9 w-9">
                         <AvatarImage src={user?.avatar} alt={user?.name} />
                         <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
                       </Avatar>
+                    ) : (
+                      <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center ring-2 ring-primary/20">
+                        <UserCircle className="w-6 h-6 text-primary" />
+                      </div>
+                    )}
                     <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-primary" />
                     <span className="sr-only">{t('nav.usermenu')}</span>
                   </Button>
@@ -385,7 +428,7 @@ const Navbar = () => {
               <Button 
                 variant="ghost" 
                 className="hover:bg-muted transition-colors whitespace-nowrap"
-                onClick={login}
+                onClick={()=>login('', '')}
               >
                 {t('nav.signin')}
               </Button>
@@ -442,7 +485,9 @@ const Navbar = () => {
                     <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
                   </Avatar>
                 ) : (
-                  <User className="h-6 w-6" />
+                  <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center ring-2 ring-primary/20">
+                    <UserCircle className="w-6 h-6 text-primary" />
+                  </div>
                 )}
                 <span className="sr-only">{t('nav.usermenu')}</span>
               </Button>

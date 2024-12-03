@@ -19,6 +19,7 @@ interface User {
   id: string;
   name: string;
   email: string;
+  role: 'freelancer' | 'client';
   avatar?: string;
 }
 
@@ -35,6 +36,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       id: '1',
       name: 'John Doe',
       email: email,
+      role: 'freelancer',
     });
   };
 
@@ -45,6 +47,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       id: '1',
       name,
       email,
+      role: 'freelancer',
     });
   };
 

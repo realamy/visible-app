@@ -391,37 +391,38 @@
       "messages": "الرسائل",
       "earnings": "الأرباح",
       "reviews": "التقييمات",
-      "availability": "التوفر",
+      "freelancers": "المحترفون",
+      "contracts": "العقود",
       "settings": "الإعدادات"
     },
     "overview": {
       "title": "لوحة التحكم",
-      "subtitle": "مرحباً بعودتك! إليك ما يحدث في مشاريعك."
-    },
-    "actions": {
-      "editprofile": "تعديل الملف الشخصي",
-      "viewprofile": "عرض الملف الشخصي"
+      "subtitle": "مرحباً بعودتك!"
     },
     "stats": {
-      "earnings": "الأرباح الإجمالية",
-      "messages": "الرسائل الجديدة",
-      "rating": "التقييم العام",
-      "fromlastmonth": "مقارنة بالشهر الماضي",
-      "activeprojects": "المشاريع النشطة",
-      "activeprojectsdesc": "عدد المشاريع الجارية حالياً",
-      "earningsdesc": "إجمالي أرباحك في الشهر الحالي",
-      "messagesdesc": "عدد الرسائل غير المقروءة في صندوق الوارد",
-      "ratingdesc": "متوسط تقييم العملاء لك"
+      "activeProjects": "المشاريع النشطة",
+      "activeProjectsDesc": "عدد المشاريع الجارية حالياً",
+      "earnings": "الأرباح",
+      "earningsDesc": "إجمالي أرباحك في الشهر الحالي",
+      "rating": "التقييم",
+      "ratingDesc": "متوسط تقييم العملاء لك",
+      "messages": "الرسائل",
+      "messagesDesc": "عدد الرسائل غير المقروءة",
+      "fromLastMonth": "مقارنة بالشهر الماضي"
     },
-    "recentActivity": {},
-    "earnings": {
-      "title": "نظرة عامة على الأرباح",
-      "viewreport": "عرض التقرير",
-      "chartplaceholder": "الرسم البياني للأرباح قريباً"
-    },
-    "recentactivity": {
-      "title": "النشاط الأخير",
-      "empty": "لا يوجد نشاط حديث"
+    "recentProjects": "المشاريع الحالية",
+    "client": "العميل",
+    "freelancer": "المحترف",
+    "deadline": "الموعد النهائي",
+    "viewAllProjects": "عرض جميع المشاريع"
+  },
+  "projects": {
+    "websiteDevelopment": "تطوير موقع إلكتروني",
+    "mobileAppDesign": "تصميم تطبيق جوال",
+    "status": {
+      "inProgress": "قيد التنفيذ",
+      "review": "قيد المراجعة",
+      "completed": "مكتمل"
     }
   },
   "settings": {

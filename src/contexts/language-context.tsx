@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LanguageCode } from '@/data/categories'
+import { DirectionProvider } from "@radix-ui/react-direction"
 
 interface LanguageContextType {
   language: LanguageCode
@@ -41,7 +42,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
 
   return (
     <LanguageContext.Provider value={{ language, direction, setLanguage }}>
-      {children}
+      <DirectionProvider dir={direction}>{children}</DirectionProvider>
     </LanguageContext.Provider>
   )
 }
